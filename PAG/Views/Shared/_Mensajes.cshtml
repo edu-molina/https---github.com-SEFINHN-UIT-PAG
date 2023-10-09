@@ -1,0 +1,19 @@
+﻿
+
+
+@if (ViewData["correcto"] != "" && ViewData["correcto"] != null)
+{
+    <div class="alert alert-success hideBootStrapAlert">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <span class="glyphicon glyphicon-ok"></span>
+        <strong>Correcto</strong> @ViewData["correcto"]
+    </div>
+}
+
+else
+{
+    @Html.ValidationSummary(true,
+        (string.IsNullOrEmpty((string)ViewData["error_modal"]) ? "No se guardaron los datos." : "Advertencia."), 
+    new { @class = "text-warning alert-warning hideBootStrapAlert well-sm", @arialabel = "close" })
+}
+

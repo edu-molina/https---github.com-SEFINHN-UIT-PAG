@@ -1,0 +1,29 @@
+﻿
+@*<summary>
+    Editor Template APP de la columna BANDERA
+</summary>
+    <history>
+    FECHA               REPONSABLE              DESCRIPCION
+    18/May/2016         Danny Lainez            Creacion de la Template
+</history>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //REMOVER EL NAME INCORRECTO DE LAS BANDERAS:
+        $(".ckBandera").each(function (e) { $(this).attr("name", $(this).attr("name").split(".")[0]); });
+    });
+    //ASIGNAR VALOR A LA BANDERA CADA VEZ QUE CAMBIE:
+    $(".ckBandera").change(function () { $(this).attr("value", this.checked ? "S" : "N"); });
+</script>
+*@
+
+@model string
+
+@functions {
+    object getHtmlAttributes(string value, string CssClass)
+    {
+        return new { @class = CssClass, @value = value };
+    }
+}
+
+    @Html.CheckBox("isOK", (Model == "S" ? true : false), @getHtmlAttributes(Model, "ckBandera"))
+    @Html.Hidden("isOK", "N", @getHtmlAttributes("N", "ckBandera"))

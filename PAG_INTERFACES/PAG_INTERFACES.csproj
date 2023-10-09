@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3E883B50-A393-4D7A-9D27-65E69B31AD0F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAG_INTERFACES</RootNamespace>
+    <AssemblyName>PAG_INTERFACES</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="iBANCOS.cs" />
+    <Compile Include="iBENEFICIARIOS.cs" />
+    <Compile Include="iBEN_TIPOS_IDENTIFICACION.cs" />
+    <Compile Include="iCLASES_DE_GASTO_CIP.cs" />
+    <Compile Include="iCLASES_DE_GASTO_SIP.cs" />
+    <Compile Include="iCOLA_PARAMETROS_REPORTES.cs" />
+    <Compile Include="iDCO_COLUMNAS.cs" />
+    <Compile Include="iDCO_DOCUMENTOS_COLUMNAS.cs" />
+    <Compile Include="iDCO_DOCUMENTOS.cs" />
+    <Compile Include="iDEDUCCIONES.cs" />
+    <Compile Include="iDLB_LIB_BOLSON_CAB.cs" />
+    <Compile Include="iDLB_LIB_BOLSON_DET.cs" />
+    <Compile Include="iDTP_DETALLES_DET.cs" />
+    <Compile Include="iDTP_DOCUMENTOS_DET.cs" />
+    <Compile Include="iDTP_TIPOS_PROGRA_CAB.cs" />
+    <Compile Include="iDTP_TIPOS_PROGRA_DET.cs" />
+    <Compile Include="iEGA_PARTIDAS.cs" />
+    <Compile Include="iFUENTES_FINANCIAMIENTO.cs" />
+    <Compile Include="iGERENCIAS_ADMINISTRATIVAS.cs" />
+    <Compile Include="IGreetingsService.cs" />
+    <Compile Include="iINSTITUCIONES.cs" />
+    <Compile Include="iLIBRETAS.cs" />
+    <Compile Include="iLIBROS_BANCO.cs" />
+    <Compile Include="iMONEDAS.cs" />
+    <Compile Include="iMUNICIPIOS.cs" />
+    <Compile Include="iOBJETOS_DEL_GASTO.cs" />
+    <Compile Include="iPAG_Services.cs" />
+    <Compile Include="iEGA_BENEFICIARIOS.cs" />
+    <Compile Include="iDOCUMENTOS_DE_GASTOS.cs" />
+    <Compile Include="iCG_REF_CODES.cs" />
+    <Compile Include="iUNIDADES_EJECUTORAS.cs" />
+    <Compile Include="iPAISES.cs" />
+    <Compile Include="iPRG_LIBRETAS_BOLSON.cs" />
+    <Compile Include="iVM_PAG_LISTA_VALORES.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="iTPR_DETALLES.cs" />
+    <Compile Include="iTPR_DOCUMENTOS.cs" />
+    <Compile Include="iTPR_TIPOS_PROGRAMACION.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PAG_DTO\PAG_DTO.csproj">
+      <Project>{252cb159-bc42-4ade-af9b-78fde798563b}</Project>
+      <Name>PAG_DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

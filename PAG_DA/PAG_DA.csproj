@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4BACFE7-D825-4732-B3B0-317DD9C8890F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAG_DA</RootNamespace>
+    <AssemblyName>PAG_DA</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="API_TRANSICIONES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BANCOS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BENEFICIARIOS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BEN_TIPOS_IDENTIFICACION.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CG_REF_CODES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CLASES_DE_GASTO_CIP.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CLASES_DE_GASTO_SIP.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="COLA_PARAMETROS_REPORTES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CUENTAS_BANCARIAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DCO_COLUMNAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DCO_DOCUMENTOS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DCO_DOCUMENTOS_COLUMNAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DEDUCCIONES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DLB_LIB_BOLSON_CAB.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DLB_LIB_BOLSON_DET.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOCUMENTOS_DE_GASTOS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTP_DETALLES_DET.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTP_DOCUMENTOS_DET.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTP_TIPOS_PROGRA_CAB.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DTP_TIPOS_PROGRA_DET.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EGA_BENEFICIARIOS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EGA_PARTIDAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FUENTES_FINANCIAMIENTO.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GERENCIAS_ADMINISTRATIVAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="INSTITUCIONES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LIBRETAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LIBROS_BANCO.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MENSAJES_DE_ERROR.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MONEDAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MUNICIPIOS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OBJETOS_DEL_GASTO.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAG_Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAG_Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAG_Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PAG_Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PAG_Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PAG_Model_EXT.cs" />
+    <Compile Include="PAISES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PRG_LIBRETAS_BOLSON.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TPR_DETALLES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TPR_DOCUMENTOS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TPR_TIPOS_PROGRAMACION.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UNIDADES_EJECUTORAS.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VM_PAG_LISTA_VALORES.cs">
+      <DependentUpon>PAG_Model.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="PAG_Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PAG_Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PAG_Model.edmx.diagram">
+      <DependentUpon>PAG_Model.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PAG_Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PAG_Model.edmx</DependentUpon>
+      <LastGenOutput>PAG_Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PAG_Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PAG_Model.edmx</DependentUpon>
+      <LastGenOutput>PAG_Model.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

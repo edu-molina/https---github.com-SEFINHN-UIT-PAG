@@ -1,0 +1,54 @@
+﻿@model PAG_DTO.TPR_DETALLES_DTO
+
+@{
+    ViewBag.Title = "_TiposProgramDet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>TPR_DETALLES_DTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GESTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GESTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_DOCUMENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_DOCUMENTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_COLUMNA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_COLUMNA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VALOR_NUMERO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALOR_NUMERO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.VALOR_CADENA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VALOR_CADENA)
+        </dd>
+   </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

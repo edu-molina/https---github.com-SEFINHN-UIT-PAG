@@ -1,0 +1,22 @@
+﻿@*<summary>
+    Display Template APP de la columna BANDERA
+</summary>
+    <history>
+    FECHA               REPONSABLE              DESCRIPCION
+    18/May/2016         Danny Lainez            Creacion de la Template
+</history>*@
+
+@model string
+
+@functions {
+    object getHtmlAttributes(string value, string CssClass)
+    {
+        var ejem = 0;
+        ejem = ejem + 1;
+        return new { @class = CssClass, @disabled = "disabled" };
+    }
+}
+
+@Html.CheckBox("isOK", (Model == "S" ? true : false), @getHtmlAttributes(Model, "dpBandera"))
+
+

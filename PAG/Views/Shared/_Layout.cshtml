@@ -1,0 +1,1080 @@
+﻿@using System.Linq
+@using PAG.Models
+@using Sefin.Security.Mvc
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- START @@HEAD -->
+<head>
+    <base href="@Url.Content("~/")">
+    <!-- START @@META SECTION -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Blankon is a theme fullpack admin template powered by Twitter bootstrap 3 front-end framework. Included are multiple example pages, elements styles, and javascript widgets to get your project started.">
+    <meta name="keywords" content="admin, admin template, bootstrap3, clean, fontawesome4, good documentation, lightweight admin, responsive dashboard, webapp">
+    <meta name="author" content="Djava UI">
+    <title>@ViewBag.Title</title>
+    <!--/ END META SECTION -->
+    <!-- START @@FAVICONS -->
+    <!-- Cambiar nombres de iconos -->
+    <link rel="apple-touch-icon" sizes="72x72" href="@Url.Content("~/Images/apple-icon-72x72.png")">
+    <link rel="apple-touch-icon" sizes="114x114" href="@Url.Content("~/Images/apple-icon-114x114.png")">
+    <link rel="apple-touch-icon" sizes="144x144" href="@Url.Content("~/Images/apple-icon-144x144.png")">
+    <link rel="shortcut icon" href="@Url.Content("~/Images/apple-icon.png")">
+
+    <!--/ END FAVICONS -->
+    <!-- START @@FONT STYLES -->
+    <link href="@Url.Content("~/assets/admin/css/OpenSans.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/assets/admin/css/Oswald.css")" rel="stylesheet" />
+    <!--/ END FONT STYLES -->
+    <!-- START @@GLOBAL MANDATORY STYLES -->
+    <link href="@Url.Content("~/assets/global/plugins/bower_components/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+    <!--/ END GLOBAL MANDATORY STYLES -->
+    <!-- START @@PAGE LEVEL STYLES -->
+    <link href="@Url.Content("~/assets/global/plugins/bower_components/fontawesome/css/font-awesome.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/assets/global/plugins/bower_components/animate.css/animate.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/assets/global/plugins/bower_components/jquery.gritter/css/jquery.gritter.css")" rel="stylesheet">
+
+    @*Nuevo*@
+    <link href="@Url.Content("~/assets/global/plugins/bower_components/jasny-bootstrap-fileinput/css/jasny-bootstrap-fileinput.min.css")" rel="stylesheet">
+
+    @*<link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.common-material.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.material.min.css")" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.material.min.css")" rel="stylesheet" type="text/css" />*@
+
+    @*Librerias de estilo para Paginar Tablas con bootstrap*@
+    <link href="@Url.Content("~/Scripts/jquery.dataTables.min.css")" rel="stylesheet" />
+
+    <!--/ END PAGE LEVEL STYLES -->
+    <!-- START @@THEME STYLES -->
+    <link href="@Url.Content("~/assets/admin/css/reset.css")" rel="stylesheet">
+    <link href="@Url.Content("~/assets/admin/css/sefin.layout.css")" rel="stylesheet">
+    <link href="@Url.Content("~/assets/admin/css/components.css")" rel="stylesheet">
+    <link href="@Url.Content("~/assets/admin/css/plugins.css")" rel="stylesheet">
+    <link href="@Url.Content("~/assets/admin/css/themes/sefin.theme.css")" rel="stylesheet" id="theme">
+    <link href="@Url.Content("~/assets/admin/css/custom.css")" rel="stylesheet">
+    <!--/ END THEME STYLES -->
+    <!-- START @@ANGULAR COMPONENTS LEVEL STYLES -->
+    <!-- START @@NGPRIME COMPONENTS LEVEL STYLES -->
+    @*<link rel="stylesheet" type="text/css" href="@Url.Content("~/node_modules/primeng/resources/themes/bootstrap/theme.css")" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/node_modules/primeng/resources/primeng.min.css")" />*@
+    @*<link rel="stylesheet" type="text/css" href="YOUR_PATH/font-awesome.min.css" />*@
+    <!--/ END NGPRIME STYLES -->
+    <!-- Libreria para Lobibox / Notificaciones -->
+    <link href="@Url.Content("~/Scripts/lobibox/css/lobibox.min.css")" rel="stylesheet" />
+    <!--/ END ANGULAR STYLES -->
+    <!-- START JAVASCRIPT SECTION (Load javascripts at bottom to reduce load time) -->
+    <!-- START @@CORE PLUGINS -->
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/jquery/dist/jquery.min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/jquery-cookie/jquery.cookie.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/bootstrap/dist/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/typehead.js/dist/handlebars.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/typehead.js/dist/typeahead.bundle.min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/jquery-nicescroll/jquery.nicescroll.min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/jquery.sparkline.min/index.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/jquery-easing-original/jquery.easing.1.3.min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/ionsound/js/ion.sound.min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/bootbox/bootbox.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/jquery.gritter/js/jquery.gritter.min.js")"></script>
+
+
+    @*<script src="@Url.Content("~/assets/global/plugins/bower_components/jasny-bootstrap-fileinput/js/jasny-bootstrap.fileinput.min.js")"></script>*@
+
+    <!-- Libreria para signalR / Notificaciones -->
+    <script src="@Url.Content("~/Scripts/jquery.signalR-2.1.2.js")"></script>
+    <script src="@Url.Content("~/signalr/hubs")"></script>
+    <!-- Libreria para Lobibox / Notificaciones -->
+    <script src="@Url.Content("~/Scripts/lobibox/js/notifications.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/lobibox/lobiboxOptions.js")"></script>
+
+    <script src="@Url.Content("~/assets/admin/js/evento.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/underscore/underscore-min.js")"></script>
+    <script src="@Url.Content("~/assets/global/plugins/bower_components/bootstrap-calendar/js/calendar.min.js")"></script>
+
+    <!--/ END CORE PLUGINS -->
+    <!-- START @@PAGE LEVEL SCRIPTS -->
+    @*<script src="@Url.Content("~/Scripts/kendo/2015.3.930/jszip.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.all.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.aspnetmvc.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+        <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/MicrosoftAjax.debug.js")"></script>*@
+
+    @*Librerias para Paginar Tablas con bootstrap*@
+    <script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.select.min.js")"></script>
+    @*Read XLSX Files*@
+    <script lang="javascript" src="@Url.Content("~/node_modules/xlsx/dist/xlsx.core.min.js")"></script>
+    <!--/ END PAGE LEVEL SCRIPTS -->
+    <!-- START @@ANGULAR2 LEVEL SCRIPTS -->
+    <!-- Polyfill(s) for older browsers -->
+    <script src="~/node_modules/core-js/client/shim.min.js"></script>
+    <script src="~/node_modules/zone.js/dist/zone.js"></script>
+    <script src="~/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="@Url.Content("~/systemjs.config.js")"></script>
+    <script>
+
+        System.import('@Url.Content("~/app/main")').catch(function (err) { console.error(err); });
+    </script>
+    <!-- Components styles Angular2 -->
+    <link href="@Url.Content("~/Scripts/style-default.css")" rel="stylesheet" />
+    <!--/ END ANGULAR2 SCRIPTS -->
+    <!--/ END JAVASCRIPT SECTION -->
+    <!-- START @@IE SUPPORT -->
+    <!--/ END IE SUPPORT -->
+
+    <link rel="resource" type="application/l10n" href="@Url.Content("~/Scripts/web/locale/locale.properties")">
+</head>
+<!--/ END HEAD -->
+<!--
+
+|=========================================================================================================================|
+|  TABLE OF CONTENTS (Use search to find needed section)                                                                  |
+|=========================================================================================================================|
+|  01. @@HEAD                        |  Container for all the head elements                                                |
+|  02. @@META SECTION                |  The meta tag provides metadata about the HTML document                             |
+|  03. @@FAVICONS                    |  Short for favorite icon, shortcut icon, website icon, tab icon or bookmark icon    |
+|  04. @@FONT STYLES                 |  Font from google fonts                                                             |
+|  05. @@GLOBAL MANDATORY STYLES     |  The main 3rd party plugins css file                                                |
+|  06. @@PAGE LEVEL STYLES           |  Specific 3rd party plugins css file                                                |
+|  07. @@THEME STYLES                |  The main theme css file                                                            |
+|  08. @@IE SUPPORT                  |  IE support of HTML5 elements and media queries                                     |
+|=========================================================================================================================|
+|  09. @@BODY                        |  Contains all the contents of an HTML document                                      |
+|  10. @@WRAPPER                     |  Wrapping page section                                                              |
+|  11. @@HEADER                      |  Header page section contains about logo, top navigation, notification menu         |
+|  12. @@SIDEBAR LEFT                |  Sidebar page section contains all sidebar menu left                                |
+|  13. @@PAGE CONTENT                |  Contents page section contains breadcrumb, content page, footer page               |
+|  14. @@SIDEBAR RIGHT               |  Sidebar page section contains all sidebar menu right                               |
+|  15. @@BACK TOP                    |  Element back to top and action                                                     |
+|=========================================================================================================================|
+|  16. @@CORE PLUGINS                |  The main 3rd party plugins script file                                             |
+|  17. @@PAGE LEVEL SCRIPTS          |  The main theme script file                                                         |
+|=========================================================================================================================|
+
+START @@BODY
+|=========================================================================================================================|
+|  TABLE OF CONTENTS (Apply to body class)                                                                                |
+|=========================================================================================================================|
+|  01. page-boxed                   |  Page into the box is not full width screen                                         |
+|  02. page-header-fixed            |  Header element become fixed position                                               |
+|  03. page-sidebar-fixed           |  Sidebar element become fixed position with scroll support                          |
+|  04. page-sidebar-minimize        |  Sidebar element become minimize style width sidebar                                |
+|  05. page-footer-fixed            |  Footer element become fixed position with scroll support on page content           |
+|  06. page-sound                   |  For playing sounds on user actions and page events                                 |
+|=========================================================================================================================|
+
+-->
+<body class="page-sidebar-fixed page-footer-fixed page-header-fixed">
+
+    <!--[if lt IE 9]>
+    <p class="upgrade-browser">Upps!! You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- START @@WRAPPER -->
+    <section id="wrapper">
+
+        <!-- START @@HEADER -->
+        <header id="header">
+
+            <!-- Start header left -->
+            <div class="header-left">
+                <!-- Start offcanvas left: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                <div class="navbar-minimize-mobile left">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <!--/ End offcanvas left -->
+                <!-- Start navbar header -->
+                <div class="navbar-header">
+
+                    <!-- Start brand -->
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                        <img class="logo" src="@Url.Content("~/Images/LogoPlainBlankSEFIN.png")" alt="brand logo">
+                    </a><!-- /.navbar-brand -->
+                    <!--/ End brand -->
+
+                </div><!-- /.navbar-header -->
+                <!--/ End navbar header -->
+                <!-- Start offcanvas right: This menu will take position at the top of template header (mobile only). Make sure that only #header have the `position: relative`, or it may cause unwanted behavior -->
+                @*<div class="navbar-minimize-mobile right">
+                        <i class="fa fa-cog"></i>
+                    </div>*@
+                <!--/ End offcanvas right -->
+
+                <div class="clearfix"></div>
+            </div><!-- /.header-left -->
+            <!--/ End header left -->
+            <!-- Start header right -->
+            <div class="header-right">
+                <!-- Start navbar toolbar -->
+                <!--Definir variables-->
+                @{
+                    string SystemName = System.Web.Configuration.WebConfigurationManager.AppSettings["NombreSistema"];
+                    string userName = "";
+                    //SefinClaims.UsuarioClaim userData = null;
+                    SefinClaims.EstructuraAdministrativa est = null;
+                    Sefin.Security.UsuarioClaim userData = null;
+                    var decoratorSession = new DecoratorSessionVariables();
+                }
+                <div class="navbar navbar-toolbar navbar-primary">
+
+                    <!-- Start left navigation -->
+                    <ul class="nav navbar-nav navbar-left">
+
+                        <!-- Start sidebar shrink -->
+                        <li class="navbar-minimize">
+                            <a href="javascript:void(0);" title="Minimize sidebar">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                        <!--/ End sidebar shrink -->
+                        <!-- Start form search -->
+                        <li class="navbar-search"></li>
+                        <!--/ End form search -->
+
+                    </ul><!-- /.navbar-left -->
+                    <!--/ End left navigation -->
+                    <!-- Start right navigation -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- /.nav navbar-nav navbar-right -->
+                        @{
+                            if (@User.Identity.IsAuthenticated == false)
+                            {
+                                using (Html.BeginForm("login", "Home", new { retornoUrl = Html.Raw(Request.Url.AbsoluteUri) }, FormMethod.Post))
+                                {
+                                    <li>
+                                        <button type="submit" class="btn btn-primary btn-lg btn-push">Ingresar</button>
+                                    </li>
+                                }
+
+
+                            }
+                            else
+                            {
+                        <!-- Start notifications -->
+                                <li class="dropdown navbar-notification">
+
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell-o"></i><span id="notificationCount" class="rounded count label label-primary">0</span></a>
+
+                                    <!-- Start dropdown menu -->
+                                    <div class="dropdown-menu animated flipInX">
+                                        <div class="dropdown-header">
+                                            <span class="title">Notifications <strong id="notificationCountDrop">(0)</strong></span>
+                                            <span class="option text-right"><a href="#"><i class="fa fa-cog"></i> Setting</a></span>
+                                        </div>
+                                        <div class="dropdown-body niceScroll">
+
+                                            <!-- Start notification list -->
+                                            <div class="media-list small">
+
+                                                @*<a href="#" class="media">
+                                                        <div class="media-object pull-left"><i class="fa fa-share-alt fg-info"></i></div>
+                                                        <div class="media-body">
+                                                            <span class="media-text"><strong>Dolanan Remi : </strong><strong>Chris Job,</strong><strong>Denny Puk</strong> and <strong>Joko Fernandes</strong> sent you <strong>5 free energy boosts and other request</strong></span>
+                                                            <!-- Start meta icon -->
+                                                            <span class="media-meta">3 minutes</span>
+                                                            <!--/ End meta icon -->
+                                                        </div><!-- /.media-body -->
+                                                    </a><!-- /.media -->*@
+
+                                                <!-- Start notification indicator -->
+                                                @*<a href="#" class="media indicator inline">
+                                                        <span class="spinner">Load more notifications...</span>
+                                                    </a>*@
+                                                <!--/ End notification indicator -->
+
+                                            </div>
+                                            <!--/ End notification list -->
+
+                                        </div>
+                                        <div class="dropdown-footer">
+                                            <a href="#">See All</a>
+                                        </div>
+                                    </div>
+                                    <!--/ End dropdown menu -->
+
+                                </li>
+                        <!-- /.dropdown navbar-notification -->
+                        <!--/ End notifications -->
+                                <!-- Start module description -->
+                        <!-- /.dropdown navbar-message -->
+                                <li class="dropdown navbar-message">
+                                    <a id="info-module" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-lightbulb-o"></i></a>
+
+                                    <!-- Start dropdown menu -->
+                                    <!--/ End dropdown menu -->
+
+                                </li>
+                        <!--/ End module description -->
+
+                                <!-- Start profile -->
+                                userData = decoratorSession.Claims;
+                                //userName = ((SefinClaims.UsuarioClaim)System.Web.HttpContext.Current.Session["Claims"]).APELLIDOS.ToString() + ", " + ((SefinClaims.UsuarioClaim)System.Web.HttpContext.Current.Session["Claims"]).NOMBRES.ToString();
+                                userName = decoratorSession.Claims.APELLIDOS + ", " + decoratorSession.Claims.NOMBRES;
+                                <li class="dropdown navbar-profile">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <span class="meta">
+                                            <span class="avatar"><img src="@Url.Action("imageUser", "Home")" class="img-circle hidden-lg hidden-md" alt="admin"></span>
+                                            <span class="text hidden-xs hidden-sm text-muted">@userName</span>
+                                            <span class="caret"></span>
+                                        </span>
+                                    </a>
+                                    <!-- Start dropdown menu -->
+                                    <ul class="dropdown-menu animated flipInX">
+                                        <li class="dropdown-header">Cuenta</li>
+                                        <li><a href="#"><i class="fa fa-user"></i>@User.Identity.Name</a></li>
+                                        <li><a href="#"><i class="fa fa-briefcase"></i>@decoratorSession.Claims.PUESTO@*@(((SefinClaims.UsuarioClaim)System.Web.HttpContext.Current.Session["Claims"]).PUESTO)*@</a></li>
+                                        <li><a href="#"><i class="fa fa-envelope"></i>@decoratorSession.Claims.EMAIL@*@(((SefinClaims.UsuarioClaim)System.Web.HttpContext.Current.Session["Claims"]).EMAIL)*@</a></li>
+
+                                        @if (System.Web.HttpContext.Current.Session["Estructura"] != null)
+                                        {
+                                            est = (SefinClaims.EstructuraAdministrativa)System.Web.HttpContext.Current.Session["Estructura"];
+                                            <li class="dropdown-header">Ubicación</li>
+                                            <li><a href="#"><i class="fa fa-building-o"></i>Inst: @est.codigoInstitucion.ToString()</a></li>
+                                            <li><a href="#"><i class="fa fa-university"></i>GA: @est.codigoGA.ToString()</a></li>
+                                            <li><a href="#"><i class="fa fa-gavel"></i>UE: @est.codigoUE.ToString()</a></li>
+                                        }
+                                        <li class="divider"></li>
+                                        <li><button type="button" class="btn btn-primary btn-xs btn-block active layoutlogout"><i class="fa fa-sign-out"></i> Cerrar Sesión</button></li>
+                                    </ul>
+                                    <!--/ End dropdown menu -->
+                                </li><!-- /.dropdown navbar-profile -->
+                                    <!--/ End profile -->
+                                    <!-- Start settings -->
+                                @*<li class="navbar-setting pull-right">
+                                        <a href="javascript:void(0);"><i class="fa fa-cog"></i></a>
+                                    </li>*@<!-- /.navbar-setting pull-right -->
+                                    <!--/ End settings -->
+
+                            }
+                        }
+
+                    </ul><!-- /.navbar-right -->
+                    <!--/ End right navigation -->
+
+                </div><!-- /.navbar-toolbar -->
+                <!--/ End navbar toolbar -->
+            </div><!-- /.header-right -->
+            <!--/ End header left -->
+
+        </header> <!-- /#header -->
+        <!--/ END HEADER -->
+        <!--
+
+        START @@SIDEBAR LEFT
+        |=========================================================================================================================|
+        |  TABLE OF CONTENTS (Apply to sidebar left class)                                                                        |
+        |=========================================================================================================================|
+        |  01. sidebar-box               |  Variant style sidebar left with box icon                                              |
+        |  02. sidebar-rounded           |  Variant style sidebar left with rounded icon                                          |
+        |  03. sidebar-circle            |  Variant style sidebar left with circle icon                                           |
+        |=========================================================================================================================|
+
+        -->
+        <aside id="sidebar-left" class="sidebar-circle sidebar-light">
+
+            <!-- Start left navigation - profile shortcut -->
+            <div class="sidebar-content">
+
+                @{
+                    if (@User.Identity.IsAuthenticated == true)
+                    {
+
+                        <div class="media">
+                            <a class="pull-left has-notif avatar" href="javascript: displaySetting();">
+                                <img src="@Url.Action("imageUser", "Home")" alt="admin">
+                                <i class="online"></i>
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">Hola, <span>@decoratorSession.Claims.NOMBRES@*@(((SefinClaims.UsuarioClaim)System.Web.HttpContext.Current.Session["Claims"]).NOMBRES.ToString())*@</span></h4>
+                                <small>@decoratorSession.Claims.PUESTO@*@(((SefinClaims.UsuarioClaim)System.Web.HttpContext.Current.Session["Claims"]).PUESTO)*@</small>
+                            </div>
+                        </div>
+                        using (Html.BeginForm("setPerfil", "Home", new { retornoUrl = Html.Raw(Request.Url.AbsoluteUri) }, FormMethod.Post, new { id = "formGlobal" }))
+                        {
+                            {
+                                if (decoratorSession.Permisos.Perfiles.Count() > 0)
+                                {
+                                    var idPerfil = decoratorSession.Permisos.PerfilActual;
+                                    var nombrePerfil = decoratorSession.Permisos.Perfiles.First(x => x.ID_PERFIL == idPerfil).NOMBRE_PERFIL;
+
+                                    <input type="hidden" id="ID_PERFIL" value="@idPerfil" name="ID_PERFIL" />
+
+                                    <div class="btn-group btn-block">
+                                        <button type="button" class="btn btn-sm dropdown-toggle btn-block" data-toggle="dropdown" aria-expanded="false">
+                                            <span class="any">@(nombrePerfil.Length > 25 ? nombrePerfil.Substring(0, 24) : nombrePerfil )</span><span class="anysmall">...</span> <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="javascript:void(0);">Seleccione Perfil:</a></li>
+                                            <li class="divider"></li>
+                                            @foreach (var x in decoratorSession.Permisos.Perfiles)
+                                            {
+                                                if (idPerfil == x.ID_PERFIL)
+                                                {
+                                                    <li class="list-group-item-info"><a href="javascript: submitform('APP-IDPERFIL',@x.ID_PERFIL);" class="submit-link" data-idperfil="@x.ID_PERFIL">@x.NOMBRE_PERFIL</a></li>
+
+                                                }
+                                                else
+                                                {
+                                                    <li><a href="javascript: submitform('APP-IDPERFIL',@x.ID_PERFIL);" class="submit-link" data-idperfil="@x.ID_PERFIL">@x.NOMBRE_PERFIL</a></li>
+                                                }
+                                            }
+
+                                        </ul>
+                                    </div>
+
+                                }// END IF (decoratorSession.Permisos.Perfiles.Count() > 0)
+
+                                <br />
+
+                                var flujo = (string)System.Web.HttpContext.Current.Session["ID_FLUJO"];
+                                if (!string.IsNullOrEmpty(flujo) && flujo != "0")
+                                {
+
+
+                                    if (((SAS_DTO.AUX_SEGURIDAD_DTO)System.Web.HttpContext.Current.Session["Permisos"]).FlujosOperaciones.Count() > 0)
+                                    {
+                                        var idOperacion = ((string)System.Web.HttpContext.Current.Session["ID_OPERACION"]) == null ? ((SAS_DTO.AUX_SEGURIDAD_DTO)System.Web.HttpContext.Current.Session["Permisos"]).FlujosOperaciones.FirstOrDefault().ID_OPERACION : System.Web.HttpContext.Current.Session["ID_OPERACION"];
+                                        var nombreOperacion = ((SAS_DTO.AUX_SEGURIDAD_DTO)System.Web.HttpContext.Current.Session["Permisos"]).FlujosOperaciones.First(x => x.ID_OPERACION.ToString() == idOperacion.ToString()).OPERACION;
+
+                                        <input type="hidden" id="ID_OPERACION" value="@idOperacion" name="ID_OPERACION" />
+
+                                        <div class="btn-group btn-block">
+                                            <button type="button" class="btn btn-sm dropdown-toggle btn-block" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="any">@nombreOperacion.Substring(0, 24)</span><span class="anysmall">...</span> <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a href="javascript:void(0);">Seleccione Operación:</a></li>
+                                                <li class="divider"></li>
+                                                @foreach (var x in ((SAS_DTO.AUX_SEGURIDAD_DTO)System.Web.HttpContext.Current.Session["Permisos"]).FlujosOperaciones)
+                                                {
+                                                    if (idOperacion.ToString() == x.ID_OPERACION.ToString())
+                                                    {
+                                                        <li class="list-group-item-info"><a href="javascript: submitform('APP-IDOPERACION',@x.ID_OPERACION);" class="submit-link" data-idoperacion="@x.ID_OPERACION">@x.OPERACION</a></li>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="javascript: submitform('APP-IDOPERACION',@x.ID_OPERACION);" class="submit-link" data-idoperacion="@x.ID_OPERACION">@x.OPERACION</a></li>
+                                                    }
+                                                }
+
+                                            </ul>
+                                        </div>
+
+
+                                    }// END IF ((SAS_DTO.AUX_SEGURIDAD_DTO)System.Web.HttpContext.Current.Session["Permisos"]).FlujosOperaciones.Count() > 0
+                                }// END IF !string.IsNullOrEmpty(flujo) && flujo != "0"
+                            }
+                        }
+                    }// END IF @User.Identity.IsAuthenticated
+                    else
+                    {
+                        <div class="media">
+                            <a class="pull-left has-notif avatar" href="javascript:void(0);">
+                                <img src="@Url.Content("~/Images/user.png")" alt="guest">
+                                <i class="online"></i>
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">Hola, <span>Usuario</span></h4>
+                                <small>Invitado</small>
+                            </div>
+                        </div>
+                    }
+                    // END CODE BLOCK
+                }
+
+            </div>
+            <!-- /.sidebar-content -->
+            <!--/ End left navigation -  profile shortcut -->
+            <!-- Start left navigation - menu -->
+            <!-- Borrar -->
+            @*<ul class="sidebar-menu">
+                    @{
+
+                        if (@User.Identity.IsAuthenticated == true) {
+                    <!-- Start navigation -->
+                    <li class="submenu">
+                        <a href="javascript:void(0);">
+                            <span class="icon"><i class="fa fa-list"></i></span>
+                            <span class="text">Cuenta Financiera</span>
+                            <span class="plus"></span>
+                        </a>
+                        <ul style="display: none;">
+                            <li><a href="@Url.Action("Index", "Cuentas")">Cuentas</a></li>
+                            <li><a href="@Url.Action("Index", "RelacionCatalogos")">Catalogos</a></li>
+                            <li><a href="@Url.Action("Index", "Instituciones")">Instituciones</a></li>
+                            <li><a href="@Url.Action("Index", "Periodos")">Periodos</a></li>
+                            <li><a href="@Url.Action("Index", "Rendiciones")">Rendiciones</a></li>
+                        </ul>
+                    </li>
+                    <!--/ End navigation -->
+                            }
+                        }
+                </ul>*@
+            <!-- Borrar Arriba -->
+            <!--/ End left navigation - menu -->
+            <!-- Start left navigation - footer -->
+            <div class="sidebar-footer hidden-xs hidden-sm hidden-md">
+                @if (@User.Identity.IsAuthenticated == true)
+                {
+                    <a id="setting" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Configuración"><i class="fa fa-cog"></i></a>
+                }
+                <a id="fullscreen" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Pantalla completa"><i class="fa fa-desktop"></i></a>
+                @*<a data-url="@Url.Action("lockscreen", "Home")" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Bloquear"><i class="fa fa-lock"></i></a>*@
+                @if (@User.Identity.IsAuthenticated == true)
+                {
+
+                    <a id="logout" data-url="@Url.Action("logout", "Home")" class="pull-left" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-title="Cerrar sesión"><i class="fa fa-power-off"></i></a>
+                }
+            </div><!-- /.sidebar-footer -->
+            <!--/ End left navigation - footer -->
+
+        </aside><!-- /#sidebar-left -->
+        <!--/ END SIDEBAR LEFT -->
+        <!-- START @@PAGE CONTENT -->
+        <section id="page-content">
+
+            <!-- Start page header -->
+            <div class="header-content">
+                <h2><i class="fa fa-file-o"></i>@System.Web.Configuration.WebConfigurationManager.AppSettings["Sistema"] <span>@SystemName</span></h2>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">Ruta:</span>
+                    <ol class="breadcrumb">
+                        @*<li>
+                                <i class="fa fa-home"></i>
+                                <a href="dashboard.html">Dashboard</a>
+                                <i class="fa fa-angle-right"></i>
+                            </li>
+                            <li>
+                                <a href="#">Layouts</a>
+                                <i class="fa fa-angle-right"></i>
+                            </li>
+                            <li class="active">Blank Page</li>*@
+                    </ol>
+                </div>
+            </div><!-- /.header-content -->
+            <!--/ End page header -->
+            <!-- Start body content -->
+            <div class="body-content animated fadeIn" style="min-height: 600px; padding-right: 10px;padding-left: 10px;padding-top: 10px;padding-bottom: 10px;">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div id="globalWindow" class="panel rounded shadow">
+
+
+                            @RenderBody()
+
+                        </div><!-- /.panel -->
+
+                    </div>
+                </div><!-- /.row -->
+
+            </div><!-- /.body-content -->
+            <!--/ End body content -->
+            <!-- Modal content-->
+            <div id="layoutmyModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 id="layoutModalTitulo" class="modal-title">Detalle</h4>
+                        </div>
+                        <div id="layoutmodalContenido" class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-theme" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/ End Modal content -->
+            <!-- Start footer content -->
+            <footer class="footer-content">
+                2014 - <span id="copyright-year"></span> &copy; Unidad de Innovación y Tecnología - <a href="http://www.sefin.gob.hn/" target="_blank">Secretaria de Finanzas</a>, Honduras
+
+            </footer><!-- /.footer-content -->
+            <!--/ End footer content -->
+
+        </section><!-- /#page-content -->
+        <!--/ END PAGE CONTENT -->
+        <!-- START @@SIDEBAR RIGHT -->
+        <aside id="sidebar-right">
+
+            <div class="panel panel-tab">
+                <div class="panel-heading no-padding">
+                    <div class="pull-right">
+                        <ul class="nav nav-tabs">
+                            <li>
+                                <a href="#sidebar-layout" data-toggle="tab">
+                                    <i class="fa fa-cogs"></i>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="#sidebar-setting" data-toggle="tab">
+                                    <i class="fa fa-paint-brush"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="panel-body no-padding">
+                    <div class="tab-content">
+                        <div class="tab-pane" id="sidebar-layout">
+                            <div class="sidebar-layout">
+
+                                <!-- Start right navigation - menu -->
+                                <ul class="sidebar-menu niceScroll">
+
+                                    <!--/ Start navigation - reset settings -->
+                                    <li>
+                                        <a id="reset-setting" href="javascript:void(0);" class="btn btn-inverse btn-block"><i class="fa fa-refresh fa-spin"></i> RESET SETTINGS</a>
+                                    </li>
+                                    <!--/ End navigation - reset settings -->
+                                    <!-- Start category layout -->
+                                    <li class="sidebar-category">
+                                        <span>LAYOUT</span>
+                                        <span class="pull-right"><i class="fa fa-toggle-on"></i></span>
+                                    </li>
+                                    <!--/ End category layout -->
+                                    <!--/ Start navigation - layout -->
+                                    <li>
+                                        <ul class="list-unstyled layout-setting">
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="layout-fluid" type="radio" name="layout" value="">
+                                                    <label for="layout-fluid">Fluid</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="layout-boxed" type="radio" name="layout" value="page-boxed">
+                                                    <label for="layout-boxed">Boxed</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--/ End navigation - layout -->
+                                    <!-- Start category header -->
+                                    <li class="sidebar-category">
+                                        <span>HEADER</span>
+                                        <span class="pull-right"><i class="fa fa-toggle-on"></i></span>
+                                    </li>
+                                    <!--/ End category header -->
+                                    <!--/ Start navigation - header -->
+                                    <li>
+                                        <ul class="list-unstyled header-layout-setting">
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="header-default" type="radio" name="header" value="">
+                                                    <label for="header-default">Default</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="header-fixed" type="radio" name="header" value="page-header-fixed">
+                                                    <label for="header-fixed">Fixed</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--/ End navigation - header -->
+                                    <!-- Start category sidebar -->
+                                    <li class="sidebar-category">
+                                        <span>SIDEBAR</span>
+                                        <span class="pull-right"><i class="fa fa-toggle-on"></i></span>
+                                    </li>
+                                    <!--/ End category sidebar -->
+                                    <!--/ Start navigation - sidebar -->
+                                    <li>
+                                        <ul class="list-unstyled sidebar-layout-setting">
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="sidebar-default" type="radio" name="sidebar" value="">
+                                                    <label for="sidebar-default">Default</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="sidebar-fixed" type="radio" name="sidebar" value="page-sidebar-fixed">
+                                                    <label for="sidebar-fixed">Fixed</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--/ End navigation - sidebar -->
+                                    <!-- Start category sidebar type -->
+                                    <li class="sidebar-category">
+                                        <span>SIDEBAR TYPE</span>
+                                        <span class="pull-right"><i class="fa fa-toggle-on"></i></span>
+                                    </li>
+                                    <!--/ End category sidebar type -->
+                                    <!--/ Start navigation - sidebar -->
+                                    <li>
+                                        <ul class="list-unstyled sidebar-type-setting">
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="sidebar-type-default" type="radio" name="sidebarType" value="">
+                                                    <label for="sidebar-type-default">Default</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="sidebar-type-box" type="radio" name="sidebarType" value="sidebar-box">
+                                                    <label for="sidebar-type-box">Box</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="sidebar-type-rounded" type="radio" name="sidebarType" value="sidebar-rounded">
+                                                    <label for="sidebar-type-rounded">Rounded</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="sidebar-type-circle" type="radio" name="sidebarType" value="sidebar-circle">
+                                                    <label for="sidebar-type-circle">Circle</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--/ End navigation - sidebar -->
+                                    <!-- Start category footer -->
+                                    <li class="sidebar-category">
+                                        <span>FOOTER</span>
+                                        <span class="pull-right"><i class="fa fa-toggle-on"></i></span>
+                                    </li>
+                                    <!--/ End category footer -->
+                                    <!--/ Start navigation - footer -->
+                                    <li>
+                                        <ul class="list-unstyled footer-layout-setting">
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="footer-default" type="radio" name="footer" value="">
+                                                    <label for="footer-default">Default</label>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="rdio rdio-theme">
+                                                    <input id="footer-fixed" type="radio" name="footer" value="page-footer-fixed">
+                                                    <label for="footer-fixed">Fixed</label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <!--/ End navigation - footer -->
+
+                                </ul>
+                                <!-- Start right navigation - menu -->
+                            </div>
+                        </div><!-- /#sidebar-layout -->
+                        <div class="tab-pane in active" id="sidebar-setting">
+                            <div class="sidebar-setting">
+                                <!-- Start right navigation - menu -->
+                                <ul class="sidebar-menu">
+
+                                    <!-- Start category color schemes -->
+                                    <li class="sidebar-category">
+                                        <span>COLOR SCHEMES</span>
+                                        <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                    </li>
+                                    <!--/ End category color schemes -->
+                                    <!-- Start navigation - themes -->
+                                    <li>
+                                        <div class="sidebar-themes color-schemes">
+
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #81b71a" data-toggle="tooltip" data-placement="right" data-original-title="Default"><span class="hide">default</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #00B1E1" data-toggle="tooltip" data-placement="top" data-original-title="Blue"><span class="hide">blue</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #37BC9B" data-toggle="tooltip" data-placement="top" data-original-title="Cyan"><span class="hide">cyan</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #8CC152" data-toggle="tooltip" data-placement="top" data-original-title="Green"><span class="hide">green</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #E9573F" data-toggle="tooltip" data-placement="top" data-original-title="Red"><span class="hide">red</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #F6BB42" data-toggle="tooltip" data-placement="top" data-original-title="Yellow"><span class="hide">yellow</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #906094" data-toggle="tooltip" data-placement="top" data-original-title="Purple"><span class="hide">purple</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #D39174" data-toggle="tooltip" data-placement="top" data-original-title="Brown"><span class="hide">brown</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #9FB478" data-toggle="tooltip" data-placement="left" data-original-title="Green Army"><span class="hide">green-army</span></a>
+
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #63D3E9" data-toggle="tooltip" data-placement="right" data-original-title="Blue Sea"><span class="hide">blue-sea</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #5577B4" data-toggle="tooltip" data-placement="top" data-original-title="Blue Gray"><span class="hide">blue-gray</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #AF86B9" data-toggle="tooltip" data-placement="top" data-original-title="Purple Gray"><span class="hide">purple-gray</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #CC6788" data-toggle="tooltip" data-placement="top" data-original-title="Purple Wine"><span class="hide">purple-wine</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #F06F6F" data-toggle="tooltip" data-placement="top" data-original-title="Alizarin Crimson"><span class="hide">alizarin-crimson</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #979797" data-toggle="tooltip" data-placement="top" data-original-title="Black And White"><span class="hide">black-and-white</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #8BC4B9" data-toggle="tooltip" data-placement="top" data-original-title="Amazon"><span class="hide">amazon</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #B0B069" data-toggle="tooltip" data-placement="top" data-original-title="Amber"><span class="hide">amber</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #A9C784" data-toggle="tooltip" data-placement="left" data-original-title="Android green"><span class="hide">android-green</span></a>
+
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #B3998A" data-toggle="tooltip" data-placement="right" data-original-title="Antique brass"><span class="hide">antique-brass</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #8D8D6E" data-toggle="tooltip" data-placement="top" data-original-title="Antique Bronze"><span class="hide">antique-bronze</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #B0B69D" data-toggle="tooltip" data-placement="top" data-original-title="Artichoke"><span class="hide">artichoke</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #F19B69" data-toggle="tooltip" data-placement="top" data-original-title="Atomic Tangerine"><span class="hide">atomic-tangerine</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #98777B" data-toggle="tooltip" data-placement="top" data-original-title="Bazaar"><span class="hide">bazaar</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #C3A961" data-toggle="tooltip" data-placement="top" data-original-title="Bistre Brown"><span class="hide">bistre-brown</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #D6725E" data-toggle="tooltip" data-placement="top" data-original-title="Bittersweet"><span class="hide">bittersweet</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #7789D1" data-toggle="tooltip" data-placement="top" data-original-title="Blueberry"><span class="hide">blueberry</span></a>
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #6FA362" data-toggle="tooltip" data-placement="left" data-original-title="Bud Green"><span class="hide">bud-green</span></a>
+
+                                            <a class="theme" href="javascript:void(0);" style="background-color: #066682" data-toggle="tooltip" data-placement="right" data-original-title="Sefin"><span class="hide">sefin</span></a>
+
+                                        </div><!-- /.sidebar-themes -->
+                                    </li>
+                                    <!--/ End navigation - themes -->
+                                    <!-- Start category navbar color -->
+                                    <li class="sidebar-category">
+                                        <span>NAVBAR COLOR</span>
+                                        <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                    </li>
+                                    <!--/ End category navbar color -->
+                                    <!-- Start navigation - navbar color -->
+                                    <li>
+                                        <div class="sidebar-themes navbar-color">
+
+                                            <a class="theme bg-dark" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Dark"><span class="hide">dark</span></a>
+                                            <a class="theme bg-light" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Light"><span class="hide">light</span></a>
+                                            <a class="theme bg-primary" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Primary"><span class="hide">primary</span></a>
+                                            <a class="theme bg-success" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Success"><span class="hide">success</span></a>
+                                            <a class="theme bg-info" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Info"><span class="hide">info</span></a>
+                                            <a class="theme bg-warning" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Warning"><span class="hide">warning</span></a>
+                                            <a class="theme bg-danger" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Danger"><span class="hide">danger</span></a>
+
+                                        </div><!-- /.navbar-color -->
+                                    </li>
+                                    <!--/ End navigation - navbar color -->
+                                    <!-- Start category sidebar color -->
+                                    <li class="sidebar-category">
+                                        <span>SIDEBAR COLOR</span>
+                                        <span class="pull-right"><i class="fa fa-tint"></i></span>
+                                    </li>
+                                    <!--/ End category sidebar color -->
+                                    <!-- Start navigation - sidebar color -->
+                                    <li>
+                                        <div class="sidebar-themes sidebar-color">
+
+                                            <a class="theme bg-dark" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Dark"><span class="hide">dark</span></a>
+                                            <a class="theme bg-light" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Light"><span class="hide">light</span></a>
+                                            <a class="theme bg-primary" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Primary"><span class="hide">primary</span></a>
+                                            <a class="theme bg-success" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Success"><span class="hide">success</span></a>
+                                            <a class="theme bg-info" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Info"><span class="hide">info</span></a>
+                                            <a class="theme bg-warning" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Warning"><span class="hide">warning</span></a>
+                                            <a class="theme bg-danger" href="javascript:void(0);" data-toggle="tooltip" data-placement="top" data-original-title="Danger"><span class="hide">danger</span></a>
+
+                                        </div><!-- /.sidebar-color -->
+                                    </li>
+                                    <!--/ End navigation - sidebar color -->
+                                    <!--/ End left navigation - summary -->
+
+                                </ul>
+                                <!-- Start right navigation - menu -->
+                            </div>
+                        </div><!-- /#sidebar-setting -->
+                    </div>
+                </div>
+            </div>
+
+        </aside><!-- /#sidebar-right -->
+        <!--/ END SIDEBAR RIGHT -->
+
+    </section><!-- /#wrapper -->
+    <!--/ END WRAPPER -->
+    <!-- START @@BACK TOP -->
+    <div id="back-top" class="animated pulse circle">
+        <i class="fa fa-angle-up"></i>
+    </div><!-- /#back-top -->
+    <!--/ END BACK TOP -->
+    @{
+        var keySession = "";
+        if (@User.Identity.IsAuthenticated == true)
+        {
+            keySession = new EncriptarNetOracle().Encriptar(User.Identity.Name, "5379075357908764");
+        }
+    }
+    <input type="hidden" value="@keySession" id="notifSession" />
+</body>
+<!--/ END BODY -->
+
+</html>
+
+<!-- START @@PAGE LEVEL SCRIPTS -->
+<script src="@Url.Content("~/assets/admin/js/apps.js")"></script>
+<!-- FOR THEME CHANGE DEMO COMMENT/UNCOMMENT FOR USE -->
+@*<script src="@Url.Content("~/assets/admin/js/pages/blankon.layout.js")"></script>
+    <script src="@Url.Content("~/assets/admin/js/pages/custom.layout.js")"></script>
+    <script src="@Url.Content("~/assets/admin/js/demo.js")"></script>*@
+<!-- / END THEME CHANGE DEMO  -->
+<script src="@Url.Content("~/Scripts/layoutGeneratorFunctions.js")"></script>
+<!--/ END PAGE LEVEL SCRIPTS -->
+<!-- START GOOGLE ANALYTICS -->
+@*<script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-55892530-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>*@
+<!--/ END GOOGLE ANALYTICS -->
+
+<script>
+    $('.layoutlogout').on('click', function (event) {
+        var sUrl = '@Url.Action("logout", "Home")';
+        window.location = sUrl;
+    });
+    $('#layoutmyModal').on('show.bs.modal', function (event) {
+
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var recipient = button.data('titulomodal'); // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this);
+
+        modal.find('#layoutModalTitulo').text(recipient);
+
+        //modal.find('.modal-body input').val(recipient)
+    });
+
+    function submitform(global, args) {
+        if (global == "APP-IDPERFIL") {
+            $("#ID_PERFIL").val(args);
+        }
+        if (global == "APP-IDOPERACION") {
+            $("#ID_OPERACION").val(args);
+        }
+        $(document.getElementById('formGlobal')).closest('form').submit();
+    }
+
+    function DropDownClick() {
+        $("#APP_ID_GESTION").change(function () {
+            var sel = this.value;
+            var urlReturn = '@Html.Raw(Request.Url.AbsoluteUri)';
+            var urlGestion = '@Url.Action("setGestion", "Home")';
+            CambioGestion(sel, urlGestion, urlReturn);
+        });
+    }
+</script>
+
+
+<script type="text/javascript" id="layoutCompartidas">
+    $(document).ready(function () {
+        //Borrar el caché para los llamados ajax
+        $.ajaxSetup({ cache: false });
+        //Habilitar estilo de tool tips
+        $('[data-toggle="tooltip"]').tooltip();
+        //Referencia EditorTemplates (Bandera): SUBSANA EL MODEL, NAME CORREGIDO:
+        $(".ckBandera").each(function (e) { $(this).attr("name", $(this).attr("name").split(".")[0]); });
+    });
+    //Referencia EditorTemplates (Bandera): SUBSANA EL MODEL, VALUE ACTUALIZADO:
+    $(".ckBandera").change(function () { $(this).attr("value", this.checked ? "S" : "N"); });
+    //Extension JQUERY para saber si un elemento existe: if ($(selector).exists()) {Do something}
+    jQuery.fn.exists = function () { return this.length > 0; }
+
+    //Ocultar/Remover Alertas BootStrap en 5seg
+    jQuery(function ($) {
+        $('.hideBootStrapAlert').show().delay(5000).fadeOut('slow', function () { $(this).remove(); });
+    });
+</script>
+
+<!-- START MENU BUILDING SECTION -->
+<script type="text/javascript">
+    var __currentBlob;
+    function displaySetting() {
+        // Add sound
+        ion.sound.play('camera_flashing');
+        var form = $('<div class="">' +
+            '<div class="panel rounded shadow">' +
+            '<div class="panel-body">' +
+            '<div class="inner-all">' +
+            '<ul class="list-unstyled">' +
+            '<li class="text-center">' +
+            '<img class="img-circle img-bordered-primary" src="@Url.Action("imageUser", "Home")" alt="Foto Perfil" style="width: 104px;height: 104px;">' +
+            '</li><li class="text-center">' +
+            '<h4 class="text-capitalize">@userName</h4>' +
+            '<p class="text-muted text-capitalize">@(userData == null ? "": userData.PUESTO)</p></li><li><br/></li>' +
+            '<li><div class="btn-group-vertical btn-block">' +
+            '<a href="@Url.Action("logout", "Home")" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Cerrar sesión</a></div></li></ul></div></div>' +
+            '</div><!-- /.panel --><div class="panel panel-theme rounded shadow"><div class="panel-heading">' +
+            '<div class="pull-left"><h3 class="panel-title">Contacto</h3></div><div class="clearfix"></div>' +
+            '</div><!-- /.panel-heading --><div class="panel-body no-padding rounded"><ul class="list-group no-margin">' +
+            '<li class="list-group-item"><i class="fa fa-user mr-5"></i> @User.Identity.Name</li> <li class="list-group-item"><i class="fa fa-envelope mr-5">' +
+            '</i> @(userData == null ? "" : userData.EMAIL)</li>' +
+            '<li class="list-group-item"><i class="fa fa-building-o mr-5"></i> @(est == null ? "" : est.INSTITUCION)</li><li class="list-group-item">' +
+            '<i class="fa fa-university mr-5"></i> @(est == null ? "" : est.GA)</li><li class="list-group-item"><i class="fa fa-gavel mr-5">' +
+            '</i> @(est == null ? "" : est.UE)</li></ul></div><!-- /.panel-body --></div>' +
+            '<!-- /.panel --></div>');
+        bootbox.dialog({
+            message: form,
+            title: 'Configuración',
+            className: 'modal-primary modal-center',
+            buttons: {
+
+                main: {
+                    label: 'OK',
+                    className: 'btn-primary',
+
+                }
+            },
+            onEscape: function () {
+                $('.bootbox.modal').modal('hide');
+            }
+        });
+    }
+    $(document).ready(function () {
+        var laUrl = '@Url.Action("GetMenu", "Home")';
+        $.ajax({
+            type: "GET",
+            url: laUrl,
+            data: { parameter: "valor" },
+            success: function (data) {
+                layoutGeneratorFunctions.CrearMenu(data);
+                BlankonApp.handleSidebarNavigation();
+            },
+        });
+
+        layoutGeneratorFunctions.bredcrumbLocation();
+
+        $('#setting').on('click', function () { displaySetting(); });
+
+        $('#info-module').on('click', function () {
+            // Add sound
+            ion.sound.play('camera_flashing');
+            var form = $('<div class="panel">' +
+                '<div class="panel-heading">' +
+                '<h4 class="media-heading">Nombre Módulo</small></h4>' +
+                '</div><!-- /.panel-heading -->' +
+                '<div class="panel-body">' +
+                '<p class="lead"> Historia del Módulo </p><hr><p> Resumen</p><br>' +
+                '<p class="lead"> Decretos o Leyes que dieron origen al Módulo </p><hr><p> Leyes</p><br>' +
+                '<p class="lead"> Lista de Tipos de Usuarios a los que está dirigido el Módulo </p><hr><p> Tipos usuarios</p><br>' +
+                '</div><!-- /.panel-body --></div>');
+            bootbox.dialog({
+                message: form,
+                title: 'Información General Módulo',
+                className: 'modal-primary modal-center',
+                buttons: {
+
+                    main: {
+                        label: 'OK',
+                        className: 'btn-primary',
+
+                    }
+                },
+                onEscape: function () {
+                    $('.bootbox.modal').modal('hide');
+                }
+            });
+        });
+        layoutGeneratorFunctions.conteoNotificaciones();
+    });
+</script>
+
+<!-- / END MENU BUILDING SECTION -->

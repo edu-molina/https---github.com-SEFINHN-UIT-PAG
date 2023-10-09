@@ -1,0 +1,40 @@
+﻿@model PAG_DTO.TPR_DOCUMENTOS_DTO
+
+@{
+    ViewBag.Title = "_TiposProgramDoctos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h4>TPR_DOCUMENTOS_DTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SECUENCIA_DOC)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SECUENCIA_DOC)
+        </dd
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_DOCUMENTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_DOCUMENTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OBSERVACION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OBSERVACION)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Ocurrio un problema";
+}
+<link href="@Url.Content("~/assets/admin/css/pages/error-page.css")" rel="stylesheet" />
+@*<div class="col-middle">
+        <div class="text-center text-center">
+            <h1 class="error-number">500</h1>
+            <h2>Ocurrio un problema</h2>
+            <p>
+                @ViewBag.mensaje
+            </p>
+        </div>
+    </div>*@
+
+
+<div class="error-wrapper">
+    <h1>@ViewBag.CodigoError</h1>
+    <h3>Ocurrio un problema.</h3>
+    <h4>@ViewBag.mensaje</h4>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-sm btn-theme">Regresar a Inicio</a>
+    @*<a href="dashboard.html" class="btn btn-sm btn-theme">Go to Dashboard</a>*@
+</div>
+@*<my-app></my-app>*@
+<script type="text/javascript">
+    $("#globalWindow").removeClass("panel rounded shadow");
+</script>

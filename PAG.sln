@@ -1,0 +1,114 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAG_DTO", "PAG_DTO\PAG_DTO.csproj", "{252CB159-BC42-4ADE-AF9B-78FDE798563B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAG_INTERFACES", "PAG_INTERFACES\PAG_INTERFACES.csproj", "{3E883B50-A393-4D7A-9D27-65E69B31AD0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAG_MAPPERS", "PAG_MAPPERS\PAG_MAPPERS.csproj", "{860AA89B-DC28-4A07-80AA-6827F3A50DF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAG_DA", "PAG_DA\PAG_DA.csproj", "{D4BACFE7-D825-4732-B3B0-317DD9C8890F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sefin.Security", "Sefin.Security\Sefin.Security.csproj", "{7BB61664-D30D-429A-968D-B72251EB18A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sefin.Security.Mvc", "Sefin.Security.Mvc\Sefin.Security.Mvc.csproj", "{F8DE4D3B-FE78-4D85-B256-B88D38A76727}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sefin.Security.Wcf", "Sefin.Security.Wcf\Sefin.Security.Wcf.csproj", "{FC6F66C9-71AF-4AF8-9E4A-952B54BC28C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAG", "PAG\PAG.csproj", "{322AA1BD-7901-4A85-AD12-3B4AE2A7961E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C0FEB7F1-11EC-4380-8604-A618D4D1A94F} = {C0FEB7F1-11EC-4380-8604-A618D4D1A94F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAG_WCF", "PAG_WCF\PAG_WCF.csproj", "{C0FEB7F1-11EC-4380-8604-A618D4D1A94F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B86DA732-BECC-4F10-B8AB-8ED3F11BFEFA}"
+	ProjectSection(SolutionItems) = preProject
+		.tfignore = .tfignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{252CB159-BC42-4ADE-AF9B-78FDE798563B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{252CB159-BC42-4ADE-AF9B-78FDE798563B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{252CB159-BC42-4ADE-AF9B-78FDE798563B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{252CB159-BC42-4ADE-AF9B-78FDE798563B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E883B50-A393-4D7A-9D27-65E69B31AD0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E883B50-A393-4D7A-9D27-65E69B31AD0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E883B50-A393-4D7A-9D27-65E69B31AD0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E883B50-A393-4D7A-9D27-65E69B31AD0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{860AA89B-DC28-4A07-80AA-6827F3A50DF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{860AA89B-DC28-4A07-80AA-6827F3A50DF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{860AA89B-DC28-4A07-80AA-6827F3A50DF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{860AA89B-DC28-4A07-80AA-6827F3A50DF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4BACFE7-D825-4732-B3B0-317DD9C8890F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4BACFE7-D825-4732-B3B0-317DD9C8890F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4BACFE7-D825-4732-B3B0-317DD9C8890F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4BACFE7-D825-4732-B3B0-317DD9C8890F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BB61664-D30D-429A-968D-B72251EB18A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BB61664-D30D-429A-968D-B72251EB18A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BB61664-D30D-429A-968D-B72251EB18A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BB61664-D30D-429A-968D-B72251EB18A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8DE4D3B-FE78-4D85-B256-B88D38A76727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8DE4D3B-FE78-4D85-B256-B88D38A76727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8DE4D3B-FE78-4D85-B256-B88D38A76727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8DE4D3B-FE78-4D85-B256-B88D38A76727}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6F66C9-71AF-4AF8-9E4A-952B54BC28C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6F66C9-71AF-4AF8-9E4A-952B54BC28C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6F66C9-71AF-4AF8-9E4A-952B54BC28C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6F66C9-71AF-4AF8-9E4A-952B54BC28C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{322AA1BD-7901-4A85-AD12-3B4AE2A7961E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{322AA1BD-7901-4A85-AD12-3B4AE2A7961E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{322AA1BD-7901-4A85-AD12-3B4AE2A7961E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{322AA1BD-7901-4A85-AD12-3B4AE2A7961E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0FEB7F1-11EC-4380-8604-A618D4D1A94F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0FEB7F1-11EC-4380-8604-A618D4D1A94F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0FEB7F1-11EC-4380-8604-A618D4D1A94F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0FEB7F1-11EC-4380-8604-A618D4D1A94F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {008F179D-D56E-448C-9464-D65D356E97B1}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://horus:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PAG_DTO\\PAG_DTO.csproj
+		SccProjectName1 = PAG_DTO
+		SccLocalPath1 = PAG_DTO
+		SccProjectUniqueName2 = PAG_INTERFACES\\PAG_INTERFACES.csproj
+		SccProjectName2 = PAG_INTERFACES
+		SccLocalPath2 = PAG_INTERFACES
+		SccProjectUniqueName3 = PAG_MAPPERS\\PAG_MAPPERS.csproj
+		SccProjectName3 = PAG_MAPPERS
+		SccLocalPath3 = PAG_MAPPERS
+		SccProjectUniqueName4 = PAG_DA\\PAG_DA.csproj
+		SccProjectName4 = PAG_DA
+		SccLocalPath4 = PAG_DA
+		SccProjectUniqueName5 = Sefin.Security\\Sefin.Security.csproj
+		SccProjectName5 = Sefin.Security
+		SccLocalPath5 = Sefin.Security
+		SccProjectUniqueName6 = Sefin.Security.Mvc\\Sefin.Security.Mvc.csproj
+		SccProjectName6 = Sefin.Security.Mvc
+		SccLocalPath6 = Sefin.Security.Mvc
+		SccProjectUniqueName7 = Sefin.Security.Wcf\\Sefin.Security.Wcf.csproj
+		SccProjectName7 = Sefin.Security.Wcf
+		SccLocalPath7 = Sefin.Security.Wcf
+		SccProjectUniqueName8 = PAG\\PAG.csproj
+		SccProjectName8 = PAG
+		SccLocalPath8 = PAG
+		SccProjectUniqueName9 = PAG_WCF\\PAG_WCF.csproj
+		SccProjectName9 = PAG_WCF
+		SccLocalPath9 = PAG_WCF
+	EndGlobalSection
+EndGlobal

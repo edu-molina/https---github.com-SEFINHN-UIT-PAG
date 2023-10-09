@@ -1,0 +1,333 @@
+﻿@model PAG_DTO.DLB_LIB_BOLSON_CAB_DTO
+
+@{
+    Layout = null;
+}
+@*Scripts para el estilo de las tablas dentro del tap*@
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/themes/omega/theme.css")" />
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/primeng.min.css")" />
+@*----------------------------------------------------------*@
+<div *ngIf="mostrar==''">
+    <div class="panel-heading">
+        <div class="pull-right">
+            @*1.- COLOCAR LOS BOTONES PRINCIPALES*@
+            <button type="button" class="btn btn-primary btn-primary rounded"
+                    [disabled]="cabeceraCreada"
+                    title="Salvar Cabecera Documento"
+                    (click)="saveCab()">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Guardar
+            </button>
+            <button type="button" class="btn btn-success btn-success rounded"
+                    title="Regresar a la Pantalla Anterior"
+                    (click)="volver()">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                Regresar
+            </button>
+            <button class="btn btn-success rounded" (click)="ImprimirReporte()" [disabled]="!habilitaReporte"><i class="fa fa-print" aria-hidden="true"></i>Reporte</button>
+        </div>
+        <h3 class="panel-title"> Crear Documento Relación Libreta Bolsón Fuente</h3>
+    </div><!-- /.panel-heading -->
+
+    <form #formulario="ngForm">
+
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.INSTITUCION, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.INSTITUCION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.DESC_INSTITUCION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.NRO_DOCUMENTO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.NRO_DOCUMENTO}}" class="form-control " />
+                        @Html.ValidationMessageFor(model => model.NRO_DOCUMENTO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.GA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.GA}}" class="form-control " />
+                        @Html.ValidationMessageFor(model => model.GA, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.DESC_GA}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.TIPO_OPERACION, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        <p-dropdown [options]="operaciones" [(ngModel)]="dlb_lib_bolson_cab.TIPO_OPERACION" [ngModelOptions]="{standalone: true}"
+                                    [style]="{'width':'100%'}" placeholder="Seleccione Operación"
+                                    (onChange)="nodeChangeoperacion($event)" style="overflow:visible" [disabled]="desactivarTipoOperacion"></p-dropdown>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.DPTO_LUGAR, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.DPTO_LUGAR}} - {{dlb_lib_bolson_cab.MUN_LUGAR}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.DESC_LUGAR}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.API_ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-2 ">
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.API_ESTADO}}" class="form-control " />
+                    </div>
+                </div>
+            </div>
+            <hr />
+    <!--Aca se colocan los detalles-->
+            <div class="form-group">
+                <div class="body-content animated fadeIn">
+
+                    <div class="table-responsive">
+                        <div class="animated fadeIn">
+
+                            <div>
+                                <div class="pull-right">
+                                    <button class="btn btn-primary btn-success rounded"
+                                            title="Agregar Relación"
+                                            *ngIf="habilitarBoton('AGREGAR', dlb_lib_bolson_cab.API_ESTADO)"
+                                            data-toggle="tooltip" (click)="showDialogToAdd()">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                        Agregar
+                                    </button>
+                                </div>
+                                <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                    <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                </div>
+                                <p-dataTable [value]="dlb_lib_bolson_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                             [globalFilter]="gb" tableStyleClass="" selectionMode="single"
+                                             (onRowSelect)="clickFila($event)">
+                                    <p-column>
+                                        <template let-col let-regDetalle="rowData" pTemplate="body">
+                                            <div class="section-sample">
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-xs btn-success rounded"
+                                                   data-placement="top"
+                                                   title="Modificar Relación"
+                                                   *ngIf="habilitarBoton('MODIFICAR', regDetalle.API_ESTADO)"
+                                                   (click)="modificarRelacion(regDetalle)"><i class="fa fa-pencil"></i></a>
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-xs btn-danger rounded"
+                                                   data-placement="top"
+                                                   title="Borrar Relación"
+                                                   *ngIf="habilitarBoton('BORRAR', regDetalle.API_ESTADO)"
+                                                   (click)="borrarRelacion(regDetalle)"><i class="fa fa-close"></i></a>
+                                            </div>
+                                        </template>
+                                    </p-column>
+                                    <p-column field="PAG_INSTITUCION" header="Institución" sortable="true"> </p-column>
+                                    <p-column field="PAG_GA" header="GA " sortable="true"></p-column>
+                                    <p-column field="LIB_BANCO" header="Banco" sortable="true"></p-column>
+                                    <p-column field="LIB_CUENTA" header="Cuenta" sortable="true"></p-column>
+                                    <p-column field="LIB_LIBRETA" header="Libreta" sortable="true"></p-column>
+                                    <p-column field="MONEDA" header="Moneda" sortable="true"></p-column>
+                                    <p-column field="FUENTE" header="Fuente" sortable="true"></p-column>
+                                </p-dataTable>
+                                <p-dialog appendTo="body" header="Registro Relación" [(visible)]="mostrarDialogoCrear"
+                                          showEffect="fade" modal="modal" [width]="500">
+                                    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="mostrarDialogoCrear">
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2"><label for="institucion">Institución</label></div>
+                                            <div class="ui-grid-col-1">
+                                                {{dlb_lib_bolson_cab.INSTITUCION}}
+                                            </div>
+                                            <div class="ui-grid-col-9">
+                                                {{dlb_lib_bolson_cab.DESC_INSTITUCION}}
+                                            </div>
+                                        </div>
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2"><label for="ga">GA</label></div>
+                                            <div class="ui-grid-col-1">
+                                                {{dlb_lib_bolson_cab.GA}}
+                                            </div>
+                                            <div class="ui-grid-col-9">
+                                                {{dlb_lib_bolson_cab.DESC_GA}}
+                                            </div>
+                                        </div>
+
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2"><label for="moneda">Moneda</label></div>
+                                            <div class="ui-grid-col-8">
+                                                <p-dropdown [options]="monedas" [filter]="true" [(ngModel)]="registroDialogo.MONEDA"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [style]="{'width':'100%'}" placeholder="Seleccione Moneda"
+                                                            (onChange)="nodeChangeMonedas($event)"
+                                                            style="overflow:visible"
+                                                            [disabled]="dlb_lib_bolson_cab.TIPO_OPERACION == 'M'">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2"><label for="fuente">Fuente</label></div>
+                                            <div class="ui-grid-col-8">
+                                                <p-dropdown [options]="fuentes" [filter]="true" [(ngModel)]="registroDialogo.FUENTE"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [style]="{'width':'100%'}" placeholder="Seleccione Fuente"
+                                                            @*(onChange)="nodeChangeFuentes($event)"*@
+                                                            style="overflow:visible"
+                                                            [disabled]="dlb_lib_bolson_cab.TIPO_OPERACION == 'M'">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2"><label for="banco">Banco</label></div>
+                                            <div class="ui-grid-col-8">
+                                                <p-dropdown [options]="bancos" [(ngModel)]="registroDialogo.LIB_BANCO"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [style]="{'width':'100%'}" placeholder="Seleccione Banco"
+                                                            (onChange)="nodeChangeBancos($event)"
+                                                            style="overflow:visible">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2"><label for="cuenta">Cuenta</label></div>
+                                            <div class="ui-grid-col-8">
+                                                <p-dropdown [options]="librosbanco" [filter]="true" [(ngModel)]="registroDialogo.LIB_CUENTA"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [style]="{'width':'100%'}" placeholder="Seleccione Cuenta"
+                                                            (onChange)="nodeChangeCuentas($event)"
+                                                            style="overflow:visible" [disabled]="!bancoCargado">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+
+                                        <div class="ui-grid-row">
+                                            <div class="ui-grid-col-2"><label for="libreta">Libreta</label></div>
+                                            <div class="ui-grid-col-8">
+                                                <p-dropdown [options]="libretas" [filter]="true" [(ngModel)]="registroDialogo.LIB_LIBRETA"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [style]="{'width':'100%'}" placeholder="Seleccione Libreta"
+                                                            (onChange)="nodeChangeLibretas($event)"
+                                                            style="overflow:visible" [disabled]="!cuentaCargada">
+                                                </p-dropdown>
+                                            </div>
+                                        </div>
+
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                    </div>
+
+                                    <p-footer>
+                                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                            <button type="button" pButton icon="fa-close" class="ui-button-danger" label="Cancelar"
+                                                    (click)="cerrarDialog()"></button>
+                                            <button type="button" pButton icon="fa-floppy-o" class="ui-button-info" label="Guardar"
+                                                    (click)="salvarRelacion()"></button>
+                                        </div>
+                                    </p-footer>
+                                </p-dialog>
+                                <p-dialog appendTo="body" header="Registro Relación" [(visible)]="mostrarDialogoModificar"
+                                          showEffect="fade" modal="modal" [width]="900">
+                                    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="mostrarDialogoModificar">
+                                        <p-dataTable [value]="consolidado_bolson_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                     [globalFilter]="gb" tableStyleClass=""
+                                                     [(selection)]="listaSeleccionados">
+                                            <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                            <p-column field="INSTITUCION" header="Institución" sortable="true"> </p-column>
+                                            <p-column field="GA" header="GA " sortable="true"></p-column>
+                                            <p-column field="BANCO" header="Banco" sortable="true"></p-column>
+                                            <p-column field="CUENTA" header="Cuenta" sortable="true"></p-column>
+                                            <p-column field="LIBRETA" header="Libreta" sortable="true"></p-column>
+                                            <p-column field="MONEDA" header="Moneda" sortable="true"></p-column>
+                                            <p-column field="FUENTE" header="Fuente" sortable="true"></p-column>
+                                        </p-dataTable>
+                                    </div>
+
+                                    <p-footer>
+                                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                            <button type="button" pButton icon="fa-close" class="ui-button-danger" label="Cancelar"
+                                                    (click)="cerrarDialog()"></button>
+                                            <button type="button" pButton icon="fa-floppy-o" class="ui-button-info" label="Guardar"
+                                                    (click)="salvarListaModificar()"></button>
+                                        </div>
+                                    </p-footer>
+                                </p-dialog>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!--AUDITORIA-->
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.USU_VERIFICACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.USU_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.USU_VERIFICACION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-2 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.USU_APROBACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.USU_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{dlb_lib_bolson_cab.USU_APROBACION}}" class="form-control " />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.FEC_VERIFICACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.FEC_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{extraerFecha(dlb_lib_bolson_cab.FEC_VERIFICACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-2 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.FEC_APROBACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.FEC_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{extraerFecha(dlb_lib_bolson_cab.FEC_APROBACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                    </div>
+                </div>
+            </div>
+        }
+    </form>
+</div>
+<div *ngIf="mostrar=='Doc-Reporte'">
+    <reports [Parametros]="reporte" (notificar)='Recargar($event)'></reports>
+</div>

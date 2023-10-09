@@ -1,0 +1,43 @@
+﻿@model PAG_DTO.AUX_AUD_DTO
+
+@{
+    //ViewBag.Title = "Auditoria DCLM";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="well well-sm">
+    <div class="row" style="text-align:center;">
+        <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <span class="glyphicon glyphicon-user"></span>
+            @Html.LabelFor(model => model.USU_CREACION, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.DisplayFor(model => model.USU_CREACION, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <span class="glyphicon glyphicon-calendar"></span>
+            @Html.LabelFor(model => model.FEC_CREACION, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.DisplayFor(model => model.FEC_CREACION, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <span class="glyphicon glyphicon-user"></span>
+            @Html.LabelFor(model => model.USU_MODIFICACION, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.DisplayFor(model => model.USU_MODIFICACION, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <span class="glyphicon glyphicon-calendar"></span>
+            @Html.LabelFor(model => model.FEC_MODIFICACION, htmlAttributes: new { @class = "control-label " })
+            <div class="col-md-12">
+                @Html.DisplayFor(model => model.FEC_MODIFICACION, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+</div>
+

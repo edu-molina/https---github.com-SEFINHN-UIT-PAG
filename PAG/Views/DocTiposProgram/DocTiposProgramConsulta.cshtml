@@ -1,0 +1,245 @@
+﻿@model PAG_DTO.DTP_TIPOS_PROGRA_CAB_DTO
+
+@{
+    ViewBag.Title = "Registro de Tipos Programación";
+    Layout = null;
+}
+
+@*Scripts para el estilo de las tablas dentro del tap*@
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/themes/omega/theme.css")" />
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/primeng.min.css")" />
+@*----------------------------------------------------------*@
+
+ <div *ngIf="mostrar==''">
+        @*<ng2-toasty [position]="'top-center'"></ng2-toasty>*@
+        <div class="panel-heading">
+            <div class="pull-right">
+                @*1.- COLOCAR LOS BOTONES PRINCIPALES*@
+                <button type="button" class="btn btn-primary rounded" (click)="Volver()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
+                <button class="btn btn-success rounded " (click)="ImprimirReporte()" [disabled]="!habilitaReporte"><i class="fa fa-print" aria-hidden="true"></i>Reporte</button>
+            </div>
+            <h3 class="panel-title"> Consulta Registro de Tipos Programación</h3>
+        </div><!-- /.panel-heading -->
+        <form #formulario="ngForm" >
+
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @*<div class="col-xs-12 col-md-12 col-lg-12 ">*@
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.INSTITUCION, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.INSTITUCION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DESC_INSTITUCION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.NRO_DOCUMENTO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.NRO_DOCUMENTO}}" class="form-control " />
+                        @*@Html.ValidationMessageFor(model => model.NRO_DOCUMENTO, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+                <div class="form-group">
+                    @*<div class="col-xs-12 col-md-12 col-lg-12 ">*@
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.GA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.GA}}" class="form-control " />
+                        @Html.ValidationMessageFor(model => model.GA, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DESC_GA}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.TIPO_OPERACION, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DESC_TIPO_OPERACION}}" class="form-control " />
+                    </div>
+                </div>
+                @*<div class="col-xs-12 col-md-12 col-lg-12 ">
+                    </div>*@
+                <div class="form-group">
+                    @*<div class="col-xs-12 col-md-12 col-lg-12 ">*@
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.DPTO_LUGAR, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DPTO_LUGAR}} - {{dtp_tipos_program_cab.MUN_LUGAR}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DESC_LUGAR}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.API_ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-2 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.API_ESTADO}}" class="form-control " />
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <!--Aca se colocan los detalles-->
+            <div class="form-group">
+
+                @*<div class="col-md-12">*@
+
+                <!-- Start color horizontal tabs -->
+                <div class="panel panel-tab panel-tab-double shadow">
+                    <!-- Start tabs heading -->
+                    <div class="panel-heading no-padding">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-border nav-border-top-danger active">
+                                <a href="#tab6-1" data-toggle="tab" class="text-center" aria-expanded="true">
+                                    Tipo Programacion
+                                </a>
+                            </li>
+                            <li class="nav-border nav-border-top-primary" [style.display]="bloqueadoDoc">
+                                <a href="#tab6-2" data-toggle="tab" class="text-center" aria-expanded="false">
+                                    Tipo Documento
+                                </a>
+                            </li>
+                            <li class="nav-border nav-border-top-success" [style.display]="bloqueadoVal">
+                                <a href="#tab6-3" data-toggle="tab" class="text-center" aria-expanded="false">
+                                    Valores
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- /.panel-heading -->
+                    <!--/ End tabs heading -->
+                    <!-- Start tabs content -->
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="tab6-1">
+                                            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                            </div>
+                                            <p-dataTable [value]="dtp_tipos_program_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                         [globalFilter]="gb" tableStyleClass="" selectionMode="single"
+                                                         (onRowSelect)="clickFila($event)">
+                                                <p-column field="INSTITUCION_PROG" header="Institucion Prog" sortable="true"> </p-column>
+                                                <p-column field="GA_PROG" header="GA Prog" sortable="true"></p-column>
+                                                <p-column field="TIPO_PROGRAMACION" header="Tipo Programacion" sortable="true"></p-column>
+                                                <p-column field="DESC_TIPO_PROGRAMACION" header="Descripcion" sortable="true"></p-column>
+                                                <p-column field="ESPECIAL" header="Especial" sortable="true">
+                                                    <template let-col let-acc="rowData" pTemplate="body">
+                                                        <div class="align-center ckbox ckbox-theme">
+                                                            <input [checked]="acc[col.field] === 'S'" type="checkbox" disabled="disabled">
+                                                            <label></label>
+                                                        </div>
+                                                    </template>
+                                                </p-column>
+                                            </p-dataTable>
+                            </div>
+                            <div class="tab-pane fade" id="tab6-2">
+                                            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                            </div>
+                                            <p-dataTable [value]="dtp_documentos_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                         [globalFilter]="gb" selectionMode="single" tableStyleClass=""
+                                                         (onRowSelect)="clickFilaDoc($event)">
+                                                <p-column field="ID_DOCUMENTO" header="Id" sortable="true"></p-column>
+                                                <p-column field="DESC_DOCUMENTO" header="Documento" sortable="true"></p-column>
+                                                <p-column field="OBSERVACION" header="Observacion" sortable="true"></p-column>
+                                            </p-dataTable>
+
+                            </div>
+                            <div class="tab-pane fade" id="tab6-3">
+                             
+
+                                            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                            </div>
+                                            <p-dataTable [value]="dtp_detalles_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                         [globalFilter]="gb" selectionMode="multiple" tableStyleClass="">
+                                                <p-column field="ID_DOCUMENTO" header="Id" sortable="true"></p-column>
+                                                <p-column field="DESC_DOCUMENTO" header="Documento" sortable="true"></p-column>
+                                                <p-column field="DESC_COLUMNA" header="Columna" sortable="true"></p-column>
+                                                <p-column field="TIPO_COLUMNA" header="Tipo" sortable="true"></p-column>
+                                                <p-column field="VALOR_NUMERO" header="Valor numerico" sortable="true"></p-column>
+                                                <p-column field="VALOR_CADENA" header="Valor caracter" sortable="true"></p-column>
+                                            </p-dataTable>
+
+                                @*</div>*@
+                            </div>
+                        </div>
+                    </div><!-- /.panel-body -->
+                    <!--/ End tabs content -->
+                </div><!-- /.panel -->
+                <!--/ End color horizontal tabs -->
+
+            </div>
+
+            <!--AUDITORIA-->
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @*<div class="col-xs-12 col-md-12 col-lg-12 ">*@
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.USU_VERIFICACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.USU_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.USU_VERIFICACION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-2 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.USU_APROBACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3">
+                        @Html.HiddenFor(model => model.USU_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.USU_APROBACION}}" class="form-control " />
+                    </div>
+                </div>
+                <div class="form-group">
+                    @*<div class="col-xs-12 col-md-12 col-lg-12 ">*@
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.FEC_VERIFICACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.FEC_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{extraerFecha(dtp_tipos_program_cab.FEC_VERIFICACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-2 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.FEC_APROBACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.FEC_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{extraerFecha(dtp_tipos_program_cab.FEC_APROBACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                    </div>
+                </div>
+            </div>
+        }
+     </form> 
+ </div>
+
+<div *ngIf="mostrar=='Doc-Reporte'">
+    <reports [Parametros]="reporte" (notificar)='Recargar($event)'></reports>
+</div>
+           

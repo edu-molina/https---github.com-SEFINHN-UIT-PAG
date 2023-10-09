@@ -1,0 +1,191 @@
+﻿@model PAG_DTO.DLB_LIB_BOLSON_CAB_DTO
+
+@{
+    Layout = null;
+}
+@*Scripts para el estilo de las tablas dentro del tap*@
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/themes/omega/theme.css")" />
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/primeng.min.css")" />
+@*----------------------------------------------------------*@
+<div *ngIf="mostrar==''">
+    <div class="panel-heading">
+        <div class="pull-right">
+            @*1.- COLOCAR LOS BOTONES PRINCIPALES*@
+            <a href="javascript:void(0)"
+               *ngIf="habilitarBoton('ELIMINAR', dlb_lib_bolson_cab.API_ESTADO)"
+               type="button" data-placement="top"
+               class="btn btn-danger rounded"
+               (click)="eliminarDocumento(dlb_lib_bolson_cab)"
+               title="Eliminar Documento"><i class="fa fa-close"></i>Eliminar</a>
+            <a href="javascript:void(0)"
+               *ngIf="habilitarBoton('VERIFICAR', dlb_lib_bolson_cab.API_ESTADO)"
+               type="button" data-placement="top"
+               class="btn btn-warning rounded"
+               (click)="verificarDocumento(dlb_lib_bolson_cab)"
+               title="Verificar Documento"><i class="fa fa-check"> </i>Verificar</a>
+            <a href="javascript:void(0)"
+               *ngIf="habilitarBoton('DESVERIFICAR', dlb_lib_bolson_cab.API_ESTADO)"
+               type="button" data-placement="top"
+               class="btn btn-warning rounded"
+               (click)="desverificarDocumento(dlb_lib_bolson_cab)"
+               title="Desverificar Documento"><i class="fa fa-undo"> </i>Desverificar</a>
+            <a href="javascript:void(0)"
+               *ngIf="habilitarBoton('APROBAR', dlb_lib_bolson_cab.API_ESTADO)"
+               type="button" data-placement="top"
+               class="btn btn-primary rounded"
+               (click)="aprobarDocumento(dlb_lib_bolson_cab)"
+               title="Aprobar Documento"><i class="fa fa-font"> </i>probar</a>
+            <a href="javascript:void(0)"
+               type="button"
+               class="btn btn-primary rounded btn-success"
+               (click)="Volver()"
+               title="Regresar a la pantalla anterior"><i class="fa fa-arrow-left" aria-hidden="true"></i>Regresar</a>
+            <button class="btn btn-success rounded" (click)="ImprimirReporte()" [disabled]="!habilitaReporte"><i class="fa fa-print" aria-hidden="true"></i>Reporte</button>
+        </div>
+        <h3 class="panel-title" *ngIf="tipo_operacion =='consultar'">  Consulta Documento Relación Libreta Bolsón Fuente</h3>
+        <h3 class="panel-title" *ngIf="tipo_operacion !='consultar'">  Documento Relación Libreta Bolsón Fuente</h3>
+    </div><!-- /.panel-heading -->
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.LabelFor(model => model.INSTITUCION, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.INSTITUCION}}" class="form-control " />
+                </div>
+                <div class="col-xs-12 col-md-5 col-lg-5 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.DESC_INSTITUCION}}" class="form-control " />
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.LabelFor(model => model.NRO_DOCUMENTO, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.NRO_DOCUMENTO}}" class="form-control " />
+                    @Html.ValidationMessageFor(model => model.NRO_DOCUMENTO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.LabelFor(model => model.GA, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.GA}}" class="form-control " />
+                    @Html.ValidationMessageFor(model => model.GA, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-md-5 col-lg-5 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.DESC_GA}}" class="form-control " />
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.LabelFor(model => model.TIPO_OPERACION, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-3 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.DESC_TIPO_OPERACION}}" class="form-control " />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.LabelFor(model => model.DPTO_LUGAR, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.DPTO_LUGAR}} - {{dlb_lib_bolson_cab.MUN_LUGAR}}" class="form-control " />
+                </div>
+                <div class="col-xs-12 col-md-5 col-lg-5 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.DESC_LUGAR}}" class="form-control " />
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.LabelFor(model => model.API_ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-2 ">
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.API_ESTADO}}" class="form-control " />
+                </div>
+            </div>
+        </div>
+        <hr />
+    <!--Aca se colocan los detalles-->
+        <div class="form-group">
+            <div class="body-content animated fadeIn">
+
+                <div class="table-responsive">
+                    <div class="animated fadeIn">
+
+                        <div>
+                            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                            </div>
+                            <p-dataTable [value]="dlb_lib_bolson_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                         [globalFilter]="gb" tableStyleClass="" selectionMode="single">
+                                <p-column field="PAG_INSTITUCION" header="Institución" sortable="true"> </p-column>
+                                <p-column field="PAG_GA" header="GA " sortable="true"></p-column>
+                                <p-column field="LIB_BANCO" header="Banco" sortable="true"></p-column>
+                                <p-column field="LIB_CUENTA" header="Cuenta" sortable="true"></p-column>
+                                <p-column field="LIB_LIBRETA" header="Libreta" sortable="true"></p-column>
+                                <p-column field="MONEDA" header="Moneda" sortable="true"></p-column>
+                                <p-column field="FUENTE" header="Fuente" sortable="true"></p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!--AUDITORIA-->
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.DisplayNameFor(model => model.USU_VERIFICACION)
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-3 ">
+                    @Html.HiddenFor(model => model.USU_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.USU_VERIFICACION}}" class="form-control " />
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-2 ">
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.DisplayNameFor(model => model.USU_APROBACION)
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-3 ">
+                    @Html.HiddenFor(model => model.USU_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                    <input type="text" disabled value="{{dlb_lib_bolson_cab.USU_APROBACION}}" class="form-control " />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.DisplayNameFor(model => model.FEC_VERIFICACION)
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-3 ">
+                    @Html.HiddenFor(model => model.FEC_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                    <input type="text" disabled value="{{extraerFecha(dlb_lib_bolson_cab.FEC_VERIFICACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-2 ">
+                </div>
+                <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    @Html.DisplayNameFor(model => model.FEC_APROBACION)
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-3 ">
+                    @Html.HiddenFor(model => model.FEC_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                    <input type="text" disabled value="{{extraerFecha(dlb_lib_bolson_cab.FEC_APROBACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div *ngIf="mostrar=='Doc-Reporte'">
+    <reports [Parametros]="reporte" (notificar)='Recargar($event)'></reports>
+</div>

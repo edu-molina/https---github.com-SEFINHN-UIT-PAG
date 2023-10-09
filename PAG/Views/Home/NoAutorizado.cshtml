@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "NoAutorizado";
+}
+<link href="@Url.Content("~/assets/admin/css/pages/error-page.css")" rel="stylesheet" />
+@*<div class="col-middle">
+    <div class="text-center text-center">
+        <h1 class="error-number">403</h1>
+        <h2>Acceso Denegado</h2>
+        <p>
+            No posee los permisos necesarios.
+        </p>
+    </div>
+</div>*@
+
+<div class="error-wrapper">
+    <h1>403!</h1>
+    <h3>Prohibido: Acceso Denegado.</h3>
+    <h4>No posee los permisos necesarios para acceder a la página solicitada con los permisos otorgados.</h4>
+</div>
+<my-app></my-app>
+<script type="text/javascript">
+    $("#globalWindow").removeClass("panel rounded shadow");
+</script>

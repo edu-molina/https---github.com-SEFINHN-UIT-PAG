@@ -1,0 +1,454 @@
+﻿@model PAG_DTO.DTP_TIPOS_PROGRA_CAB_DTO
+
+@{
+    ViewBag.Title = "Registro de Tipos Programación";
+    Layout = null;
+}
+
+@*Scripts para el estilo de las tablas dentro del tap*@
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/themes/omega/theme.css")" />
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/primeng.min.css")" />
+@*----------------------------------------------------------*@
+@*<ng2-toasty [position]="'top-center'"></ng2-toasty>*@
+
+<div *ngIf="mostrar==''">
+
+    <div class="panel-heading">
+        <div class="pull-right">
+            @*1.- COLOCAR LOS BOTONES PRINCIPALES*@
+            @*<button class="btn btn-primary" type="submit"
+                        [disabled]="!formulario.valid">
+                    Salvar
+                </button>*@
+            <button type="button" class="btn btn-primary rounded" [disabled]="PrograCabCreado" (click)="saveCab()"><i class="fa fa-plus" aria-hidden="true"></i> Guardar</button>
+            <button type="button" class="btn btn-success rounded" (click)="Volver()"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</button>
+            <button class="btn btn-success rounded " (click)="ImprimirReporte()" [disabled]="!habilitaReporte"><i class="fa fa-print" aria-hidden="true"></i> Reporte</button>
+            @*<button class="btn btn-primary btn-sm btn-success "
+                        type="submit" (click)="Volver()">
+
+                    Regresar
+                </button>*@
+        </div>
+        <h3 class="panel-title">@ViewBag.Title</h3>
+    </div><!-- /.panel-heading -->
+
+    <form #formulario="ngForm">
+
+        @using (Html.BeginForm())
+        {
+
+            <div class="form-horizontal">
+                <hr />
+                @*<div>*@
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.INSTITUCION, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.INSTITUCION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DESC_INSTITUCION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.NRO_DOCUMENTO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.NRO_DOCUMENTO}}" class="form-control " />
+                        @Html.ValidationMessageFor(model => model.NRO_DOCUMENTO, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.GA, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.GA}}" class="form-control " />
+                        @Html.ValidationMessageFor(model => model.GA, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DESC_GA}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.TIPO_OPERACION, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        <p-dropdown [options]="operaciones" [(ngModel)]="dtp_tipos_program_cab.TIPO_OPERACION" [ngModelOptions]="{standalone: true}"
+                                    [style]="{'width':'100%'}" placeholder="Seleccione Operación"
+                                    (onChange)="nodeChangeoperacion($event)" style="overflow:visible" [disabled]="desactivarTipoOperacion">
+
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.DPTO_LUGAR, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DPTO_LUGAR}} - {{dtp_tipos_program_cab.MUN_LUGAR}}" class="form-control " />
+                        @Html.ValidationMessageFor(model => model.DPTO_LUGAR, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-xs-12 col-md-5 col-lg-5 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.DESC_LUGAR}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.LabelFor(model => model.API_ESTADO, htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-2 ">
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.API_ESTADO}}" class="form-control " />
+                    </div>
+
+                </div>
+                <hr />
+
+                <!--Aca se colocan los detalles-->
+                <div class="form-group">
+
+                    <!-- Start color horizontal tabs -->
+                    <div class="panel panel-tab panel-tab-double shadow">
+                        <!-- Start tabs heading -->
+                        <div class="panel-heading no-padding">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-border nav-border-top-danger active">
+                                    <a href="#tab6-1" data-toggle="tab" class="text-center" aria-expanded="true">
+                                        Tipo Programación
+                                    </a>
+                                </li>
+                                <li class="nav-border nav-border-top-primary" [style.display]="bloqueadoDoc">
+                                    <a href="#tab6-2" data-toggle="tab" class="text-center" aria-expanded="false">
+                                        Tipo Documento
+                                    </a>
+                                </li>
+                                <li class="nav-border nav-border-top-success" [style.display]="bloqueadoVal">
+                                    <a href="#tab6-3" data-toggle="tab" class="text-center" aria-expanded="false">
+                                        Valores
+                                    </a>
+                                </li>
+                            </ul>
+                        </div><!-- /.panel-heading -->
+                        <!--/ End tabs heading -->
+                        <!-- Start tabs content -->
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="tab6-1">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-primary rounded"
+                                                            title="Crear Tipo Programación"
+                                                            data-toggle="tooltip" (click)="showDialogToAdd()" [disabled]="!PrograCabCreado">
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>Agregar
+                                                    </button>
+                                                </div>
+                                                <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                    <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+
+                                                </div>
+
+                                                <p-dataTable [value]="dtp_tipos_program_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                             [globalFilter]="gb" tableStyleClass="" selectionMode="single"
+                                                             (onRowSelect)="clickFila($event)" [(selection)]="varTipoProg" dataKey="TIPO_PROGRAMACION">
+                                                    <p-column>
+                                                        <template let-col let-regCabecera="rowData" pTemplate="body">
+                                                            <div class="section-sample">
+                                                                <a href="javascript:void(0)" *ngIf="habilitarBotonDetalle('MODIFICAR', dtp_tipos_program_cab.API_ESTADO, dtp_tipos_program_cab.TIPO_OPERACION) "
+                                                                   class="btn btn-success btn-xs rounded" data-toggle="tooltip" data-placement="top" data-original-title="Modificar Tipo Programación" (click)="clickEditarProg(regCabecera)" title="Modificar Tipo Programación"><i class="fa fa-pencil"></i></a>
+                                                                <a href="javascript:void(0)" *ngIf="habilitarBotonDetalle('BORRAR_TIPO_PROG', dtp_tipos_program_cab.API_ESTADO, dtp_tipos_program_cab.TIPO_OPERACION) "
+                                                                   class="btn btn-danger btn-xs rounded" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Tipo Programación" (click)="eliminaProgDet(regCabecera)" title="Eliminar Tipo Programación"><i class="fa fa-close"></i></a>
+                                                            </div>
+                                                        </template>
+                                                    </p-column>
+                                                    <p-column field="INSTITUCION_PROG" header="Institución" sortable="true"> </p-column>
+                                                    <p-column field="GA_PROG" header="GA" sortable="true"></p-column>
+                                                    <p-column field="TIPO_PROGRAMACION" header="Tipo Programación" sortable="true"></p-column>
+                                                    <p-column field="DESC_TIPO_PROGRAMACION" header="Descripción" sortable="true"></p-column>
+                                                    <p-column field="ESPECIAL" header="Especial" sortable="true">
+                                                        <template let-col let-acc="rowData" pTemplate="body">
+                                                            <div class="align-center ckbox ckbox-theme">
+                                                                <input [checked]="acc[col.field] === 'S'" type="checkbox" disabled="disabled">
+                                                                <label></label>
+                                                            </div>
+                                                        </template>
+                                                    </p-column>
+                                                </p-dataTable>
+
+
+                                                <p-dialog appendTo="body" header="Tipo Programación" [(visible)]="displayDialog" responsive="true" showEffect="fade" modal="modal" [width]="500">
+                                                    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="bandera">
+                                                        <ng2-toasty [position]="'top-center'"></ng2-toasty>
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-col-4"><label>Institución</label></div>
+                                                            <div class="ui-grid-col-8"><input type="text" disabled value="{{dtp_tipos_program_cab.DESC_INSTITUCION}}" class="form-control " /></div>
+                                                        </div>
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-col-4"><label>GA</label></div>
+                                                            <div class="ui-grid-col-8"><input type="text" disabled value="{{dtp_tipos_program_cab.DESC_GA}}" class="form-control " /></div>
+                                                        </div>
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-col-4"><label for="brand">Descripción</label></div>
+                                                            <div class="ui-grid-col-8"><textarea class="form-control" rows="5" (blur)="GetDescProg($event)" value="{{nDetProg.DESC_TIPO_PROGRAMACION}}"></textarea></div>
+                                                        </div>
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-col-4"></div>
+                                                            <div class="ui-grid-col-8"><label><input type="checkbox" [checked]="ValEspecial" (change)="GetEspecialProg($event)">Especial</label></div>
+                                                        </div>
+                                                    </div>
+                                                    <p-footer>
+                                                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                            <button type="button" pButton icon="fa-close" class="ui-button-danger " (click)="cancelar()" label="Cancelar"></button>
+                                                            <button type="button" pButton icon="fa-floppy-o" class="ui-button-info " (click)="saveProgDet()" label="Guardar"></button>
+                                                        </div>
+                                                    </p-footer>
+                                                </p-dialog>
+                                                <!--Este dialogo es para cargar tipos de programacion desde el consolidado-->
+                                                <p-dialog appendTo="body" header="Tipos Programación" [(visible)]="displayDialogTipoProg" responsive="true" showEffect="fade" modal="modal" [width]="900">
+                                                    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="dtp_tipos_program_cab != 'A' ">
+                                                        <div class="ui-grid-row" style="overflow:scroll; max-height:300px;">
+
+                                                            <p-dataTable [value]="tpr_tipos_programacion" [rows]="10" [(selection)]="listaSelecTiposProg" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                                         [globalFilter]="gb" tableStyleClass="">
+                                                                <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                                                <p-column field="INSTITUCION" header="Institución" sortable="true"></p-column>
+                                                                <p-column field="GA" header="GA" sortable="true"></p-column>
+                                                                <p-column field="TIPO_PROGRAMACION" header="Tipo Programación" sortable="true"></p-column>
+                                                                <p-column field="DESC_TIPO_PROGRAMACION" header="Descripción" sortable="true"></p-column>
+                                                                <p-column field="ESPECIAL" header="Especial" sortable="true">
+                                                                    <template let-col let-acc="rowData" pTemplate="body">
+                                                                        <div class="align-center ckbox ckbox-theme">
+                                                                            <input [checked]="acc[col.field] === 'S'" type="checkbox" disabled="disabled">
+                                                                            <label></label>
+                                                                        </div>
+                                                                    </template>
+                                                                </p-column>
+                                                            </p-dataTable>
+                                                        </div>
+                                                    </div>
+                                                    <p-footer>
+                                                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                            <button type="button" pButton icon="fa-close" class="ui-button-danger " (click)="cancelar()" label="Cancelar"></button>
+                                                            <button type="button" pButton icon="fa-floppy-o" class="ui-button-info " (click)="salvarListaTiposProgram()" label="Guardar"></button>
+                                                        </div>
+                                                    </p-footer>
+                                                </p-dialog>
+
+
+                                </div>
+                                <div class="tab-pane fade" id="tab6-2">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-primary rounded"
+                                                            title="Crear Tipo Documento"
+                                                            data-toggle="tooltip"
+                                                            [disabled]="nDetProg == null"
+                                                            (click)="showDialogToAdd2()">
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                        Agregar
+                                                    </button>
+                                                </div>
+                                                <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                    <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                                </div>
+                                                <p-dataTable [value]="dtp_documentos_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                             [globalFilter]="gb" selectionMode="single" tableStyleClass="" [(selection)]="varTipoDocto"
+                                                             (onRowSelect)="clickFilaDoc($event)">
+                                                    <p-column>
+                                                        <template let-col let-regCabecera="rowData" pTemplate="body">
+                                                            <div class="section-sample">
+                                                                <a href="javascript:void(0)" (click)="clickEditarDoc(regCabecera)" *ngIf="habilitarBotonDetalle('MODIFICAR', dtp_tipos_program_cab.API_ESTADO, dtp_tipos_program_cab.TIPO_OPERACION) "
+                                                                   class="btn btn-success btn-xs rounded" data-toggle="tooltip" data-placement="top" data-original-title="Modificar Tipo de Documento" title="Modificar Tipo de Documento"><i class="fa fa-pencil"></i></a>
+                                                                <a href="javascript:void(0)" (click)="eliminaDocDet(regCabecera)" *ngIf="habilitarBotonDetalle('BORRAR', dtp_tipos_program_cab.API_ESTADO, dtp_tipos_program_cab.TIPO_OPERACION) "
+                                                                   class="btn btn-danger btn-xs rounded" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Tipo de Documento" title="Eliminar Tippo de Documento"><i class="fa fa-close"></i></a>
+                                                            </div>
+                                                        </template>
+                                                    </p-column>
+                                                    <p-column field="ID_DOCUMENTO" header="Id" sortable="true"></p-column>
+                                                    <p-column field="DESC_DOCUMENTO" header="Documento" sortable="true"></p-column>
+                                                    <p-column field="OBSERVACION" header="Observación" sortable="true"></p-column>
+                                                </p-dataTable>
+
+                                                <p-dialog appendTo="body" header="Tipo de Documento" [(visible)]="displayDialog2" responsive="true" showEffect="fade" modal="modal" [width]="500">
+                                                    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="bandera2">
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-col-4"><label for="brand">Tipo Documento</label></div>
+                                                            <div class="ui-grid-col-8">
+                                                                <p-dropdown [options]="documentos" [(ngModel)]="nDetDoc.ID_DOCUMENTO" [ngModelOptions]="{standalone: true}"
+                                                                            [style]="{'width':'100%'}" placeholder="Seleccione tipo de documento"
+                                                                            (onChange)="nodeChangeDT($event)" style="overflow:visible"
+                                                                            [disabled]="!newDocDet">
+                                                                </p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-col-4"><label for="brand">Observación</label></div>
+                                                            <div class="ui-grid-col-8"><textarea class="form-control" rows="5" value="{{nDetDoc.OBSERVACION}}" (blur)="GetObserDoc($event)"></textarea></div>
+                                                        </div>
+
+                                                    </div>
+                                                    <p-footer>
+                                                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                            <button type="button" pButton icon="fa-close" class="ui-button-danger " (click)="cancelar()" label="Cancelar"></button>
+                                                            <button type="button" pButton icon="fa-floppy-o" class="ui-button-info" (click)="saveDocDet()" label="Guardar"></button>
+                                                        </div>
+                                                    </p-footer>
+                                                </p-dialog>
+
+                                </div>
+                                <div class="tab-pane fade" id="tab6-3">
+                                    @*<div class="body-content animated fadeIn">*@
+
+                                                <div class="pull-right">
+                                                    <button class="btn btn-primary rounded"
+                                                            title="Cargar Valores"
+                                                            [disabled]="nDetDoc == null"
+                                                            data-toggle="tooltip"
+                                                            (click)="showDialogToAdd3()">
+                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                        Agregar
+                                                    </button>
+                                                </div>
+                                                <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                    <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                                </div>
+                                                <p-dataTable [value]="dtp_detalles_det" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                             [globalFilter]="gb" selectionMode="single" tableStyleClass="">
+                                                    <p-column>
+                                                        <template let-col let-regCabecera="rowData" pTemplate="body">
+                                                            <div class="section-sample">
+                                                                <a href="javascript:void(0)" (click)="eliminarValor(regCabecera)" *ngIf="habilitarBotonDetalle('BORRAR', dtp_tipos_program_cab.API_ESTADO, dtp_tipos_program_cab.TIPO_OPERACION) "
+                                                                   class="btn btn-danger btn-xs rounded" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Valor" title="Eliminar Valor"><i class="fa fa-close"></i></a>
+                                                            </div>
+                                                        </template>
+                                                    </p-column>
+                                                    <p-column field="ID_DOCUMENTO" header="Id" sortable="true"></p-column>
+                                                    <p-column field="DESC_DOCUMENTO" header="Documento" sortable="true"></p-column>
+                                                    <p-column field="DESC_COLUMNA" header="Columna" sortable="true"></p-column>
+                                                    <p-column field="TIPO_COLUMNA" header="Tipo" sortable="true"></p-column>
+                                                    <p-column field="VALOR_NUMERO" header="Valor numérico" sortable="true"></p-column>
+                                                    <p-column field="VALOR_CADENA" header="Valor texto" sortable="true"></p-column>
+                                                </p-dataTable>
+                                                <p-dialog appendTo="body" header="Agregar Valores" [(visible)]="displayDialog3" responsive="true" showEffect="fade" modal="modal" [width]="500">
+                                                    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="bandera3">
+                                                        <div class="ui-grid-row">
+                                                            <div class="ui-grid-col-4"><label for="brand">Seleccione la columna</label></div>
+                                                            <div class="ui-grid-col-8">
+                                                                <p-dropdown [options]="columnas" [filter]="true" [(ngModel)]="nDetVal.ID_COLUMNA" [ngModelOptions]="{standalone: true}"
+                                                                            [style]="{'width':'100%'}" placeholder="Seleccione la columna"
+                                                                            (onChange)="nodeChangeColumna($event)" style="overflow:visible"></p-dropdown>
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <div *ngIf="mostrarListaColumna">
+                                                            <div class="ui-grid-col-8">
+                                                                <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                                    <input #gb type="text" pInputText size="35" placeholder="Filtrar">
+                                                                </div>
+                                                            </div>
+                                                            <div class="ui-grid-row" style="overflow:scroll; max-height:300px;">
+
+                                                                <p-dataTable [value]="vm_pag_lista_valores_dto" [rows]="10" [(selection)]="ValoresSelec" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                                             [globalFilter]="gb" tableStyleClass="">
+                                                                    <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+                                                                    <p-column field="VALOR" header="Valor" sortable="true"></p-column>
+                                                                    <p-column field="DESCRIPCION" header="Descripción" sortable="true"></p-column>
+                                                                    <p-column field="OTROS_VALORES" header="Otros Valores" sortable="true"></p-column>
+                                                                </p-dataTable>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="!mostrarListaColumna && columnaNumerica">
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="valor">Valor</label></div>
+                                                                <!--<div class="ui-grid-col-8"><textarea class="form-control" rows="5" (blur)="GetValor($event)" value="{{valor}}"></textarea></div>-->
+                                                                  <!--<textarea pInputTextarea [(ngModel)]="valorNumero" [ngModelOptions]="{standalone: true}"></textarea>-->
+                                                                <input type="number" pInputText [(ngModel)]="valorNumero" [ngModelOptions]="{standalone: true}" />
+                                                            </div>
+                                                            <hr /><hr /><hr /><hr /><hr />
+                                                        </div>
+                                                        <div *ngIf="!mostrarListaColumna && !columnaNumerica">
+                                                            <div class="ui-grid-row">
+                                                                <div class="ui-grid-col-4"><label for="valor">Valor</label></div>
+                                                                <input type="text" pInputText [(ngModel)]="valorCadena" [ngModelOptions]="{standalone: true}" />
+                                                            </div>
+                                                            <hr /><hr /><hr /><hr /><hr />
+                                                        </div>
+                                                    </div>
+                                                    <p-footer>
+                                                        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+                                                            <button type="button" pButton icon="fa-close" class="ui-button-danger" (click)="cancelar()" label="Cancelar"></button>
+                                                            <button type="button" pButton icon="fa-floppy-o" class="ui-button-info" (click)="SalvaValoresDet()" label="Guardar"></button>
+                                                        </div>
+                                                    </p-footer>
+                                                </p-dialog>
+
+                                    @*</div>*@
+                                </div>
+                            </div>
+                        </div><!-- /.panel-body -->
+                        <!--/ End tabs content -->
+                    </div><!-- /.panel -->
+                    <!--/ End color horizontal tabs -->
+
+                </div>
+
+
+                <!--AUDITORIA-->
+                <div class="form-group">
+
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.USU_VERIFICACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.USU_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.USU_VERIFICACION}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-2 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.USU_APROBACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.USU_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{dtp_tipos_program_cab.USU_APROBACION}}" class="form-control " />
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.FEC_VERIFICACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.FEC_VERIFICACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{extraerFecha(dtp_tipos_program_cab.FEC_VERIFICACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-2 ">
+                    </div>
+                    <div class="col-xs-12 col-md-1 col-lg-1 ">
+                        @Html.DisplayNameFor(model => model.FEC_APROBACION)
+                    </div>
+                    <div class="col-xs-12 col-md-2 col-lg-3 ">
+                        @Html.HiddenFor(model => model.FEC_APROBACION, new { htmlAttributes = new { @class = "form-control " } })
+                        <input type="text" disabled value="{{extraerFecha(dtp_tipos_program_cab.FEC_APROBACION) | date:'dd/MM/yyyy :h:mm:ssa'}}" class="form-control " />
+                    </div>
+                </div>
+                @*</div>*@
+            </div>
+        }
+
+    </form>
+
+</div>
+<div *ngIf="mostrar=='Doc-Reporte'">
+    <reports [Parametros]="reporte" (notificar)='Recargar($event)'></reports>
+</div>

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<PAG_DTO.DLB_LIB_BOLSON_CAB_DTO>
+@{
+    ViewBag.Title = "";
+    Layout = null;
+}
+
+<ng2-toasty [position]="'top-center'"></ng2-toasty>
+<div class="panel-heading" *ngIf="mostrar=='listado'">
+    <div class="pull-right">
+        @*1.- COLOCAR LOS BOTONES PRINCIPALES*@
+        <div class="align-left">
+                <a href="javascript:void(0)"
+                   *ngIf="operacionPerfil=='REGISTRAR'"
+                   class="btn btn-primary btn-success rounded"
+                   (click)="crearDocumento()"
+                   title="Crear Documento"><i class="fa fa-plus" aria-hidden="true"></i>Agregar</a>
+        </div>
+    </div>
+    <h3 class="panel-title">Documentos Relación Libretas Bolsón Fuente</h3>
+</div><!-- /.panel-heading -->
+
+<div class="panel-body">
+    @using (Html.BeginForm())
+    {
+
+                <div *ngIf="mostrar =='listado'">
+                    <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                        <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                    </div>
+                    <p-dataTable [value]="dlb_lib_bolson_cab" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                    [globalFilter]="gb" tableStyleClass="table table-theme"
+                                    selectionMode="single">
+                        <p-column>
+                            <template let-col let-regCabecera="rowData" pTemplate="body">
+                                <div class="section-sample">
+                                    <a href="javascript:void(0)"
+                                       type="button" data-placement="top"
+                                       class="btn btn-xs btn-primary rounded"
+                                       (click)="consultarDocumento(regCabecera)"
+                                       title="Consultar Documento">
+                                       <i class="fa fa-eye"></i></a>
+                                    <a href="javascript:void(0)"
+                                        *ngIf="(operacionPerfil=='REGISTRAR') && (regCabecera.API_ESTADO =='ELABORADO')"
+                                        type="button" data-placement="top"
+                                        class="btn btn-xs btn-success rounded" @*glyphicon glyphicon-pencil "*@
+                                        (click)="modificarDocumento(regCabecera)"
+                                        title="Modificar Documento"> <i class="fa fa-pencil"></i></a>
+                                    <a href="javascript:void(0)"
+                                        *ngIf="(operacionPerfil=='REGISTRAR') && (regCabecera.API_ESTADO =='ELABORADO')"
+                                        type="button" data-placement="top"
+                                        class="btn btn-xs btn-danger rounded" @*glyphicon glyphicon-remove "*@
+                                        (click)="eliminarDocumento(regCabecera)"
+                                        title="Eliminar Documento"> <i class="fa fa-close"></i></a>
+                                    <a href="javascript:void(0)"
+                                        *ngIf="(operacionPerfil=='REGISTRAR') && (regCabecera.API_ESTADO =='ELABORADO')"
+                                        type="button" data-placement="top"
+                                        class="btn btn-xs btn-warning rounded"  @*glyphicon glyphicon-ok "*@
+                                        (click)="verificarDocumento(regCabecera)"
+                                        title="Verificar Documento"> <i class="fa fa-check"> </i> </a>
+                                    <a href="javascript:void(0)"
+                                       *ngIf="(operacionPerfil=='REGISTRAR') && (regCabecera.API_ESTADO =='VERIFICADO')"
+                                       type="button" data-placement="top"
+                                       class="btn btn-xs btn-warning rounded" 
+                                       (click)="desverificarDocumento(regCabecera)"
+                                       title="Desverificar Documento"><i class="fa fa-undo"> </i></a>
+                                    <a href="javascript:void(0)"
+                                        *ngIf="(operacionPerfil=='APROBAR') && (regCabecera.API_ESTADO =='VERIFICADO')"
+                                        type="button" data-placement="top"
+                                        class="btn btn-xs btn-primary rounded"  @*glyphicon glyphicon-font "*@
+                                        (click)="aprobarDocumento(regCabecera)"
+                                        title="Aprobar Documento"> <i class="fa fa-font"> </i></a>
+                                </div>
+                            </template>
+                        </p-column>
+                        <p-column field="INSTITUCION" header="@Html.DisplayNameFor(model => model.INSTITUCION)" sortable="true"> </p-column>
+                        <p-column field="DESC_INSTITUCION" header="" sortable="true"></p-column>
+                        <p-column field="GA" header="@Html.DisplayNameFor(model => model.GA)" sortable="true"></p-column>
+                        <p-column field="DESC_GA" header="" sortable="true"></p-column>
+                        <p-column field="NRO_DOCUMENTO" header="@Html.DisplayNameFor(model => model.NRO_DOCUMENTO)" sortable="true"></p-column>
+                        <p-column field="DPTO_LUGAR" header="@Html.DisplayNameFor(model => model.DPTO_LUGAR)" sortable="true"></p-column>
+                        <p-column field="MUN_LUGAR" header="" sortable="true"></p-column>
+                        <p-column field="DESC_LUGAR" header="" sortable="true"></p-column>
+                        <p-column field="DESC_TIPO_OPERACION" header="@Html.DisplayNameFor(model => model.DESC_TIPO_OPERACION)" sortable="true"></p-column>
+                        <p-column field="USU_VERIFICACION" header="@Html.DisplayNameFor(model => model.USU_VERIFICACION)" sortable="true"></p-column>
+                        <p-column header="@Html.DisplayNameFor(model => model.FEC_VERIFICACION)" sortable="true">
+                            <template let-col let-regCabecera="rowData" pTemplate="body">
+                                {{extraerFecha(regCabecera.FEC_VERIFICACION) | date:"dd/MM/yyyy :h:mm:ssa"}}
+                            </template>
+                        </p-column>
+                        <p-column field="USU_APROBACION" header="@Html.DisplayNameFor(model => model.USU_APROBACION)" sortable="true"></p-column>
+                        <p-column header="@Html.DisplayNameFor(model => model.FEC_APROBACION)" sortable="true">
+                            <template let-col let-regCabecera="rowData" pTemplate="body">
+                                {{extraerFecha(regCabecera.FEC_APROBACION) | date:"dd/MM/yyyy :h:mm:ssa"}}
+                            </template>
+                        </p-column>
+                        <p-column field="API_ESTADO" header="@Html.DisplayNameFor(model => model.API_ESTADO)" sortable="true"></p-column>
+                    </p-dataTable>
+                </div>
+
+                 <div *ngIf="mostrar=='Doc-Consultar'">
+                     <consulta-DocLibBolsonFte [tipo_operacion]="operacion" [dlb_lib_bolson_cab]="registro" (notificar)='onNotificar($event)'></consulta-DocLibBolsonFte>
+                 </div>
+                 <div *ngIf="mostrar == 'Doc-Crear'">
+                     <doc-DocLibBolsonFteCrear [tipo_operacion]="operacion" [dlb_lib_bolson_cab]="registro" (notificar)='onNotificar($event)'></doc-DocLibBolsonFteCrear>
+                 </div>
+
+    }
+</div>
+
+

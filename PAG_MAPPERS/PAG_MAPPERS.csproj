@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{860AA89B-DC28-4A07-80AA-6827F3A50DF3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAG_MAPPERS</RootNamespace>
+    <AssemblyName>PAG_MAPPERS</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AUX_API_MAPPERS.cs" />
+    <Compile Include="AUX_AUD_MAPPERS.cs" />
+    <Compile Include="AUX_LOVS_MAPPERS.cs" />
+    <Compile Include="AUX_MENU_MAPPERS.cs" />
+    <Compile Include="BANCOS_MAPPERS.cs" />
+    <Compile Include="BENEFICIARIOS_MAPPERS.cs" />
+    <Compile Include="BEN_TIPOS_IDENTIFICACION_MAPPERS.cs" />
+    <Compile Include="CG_REF_CODES_MAPPERS.cs" />
+    <Compile Include="CLASES_DE_GASTO_CIP_MAPPERS.cs" />
+    <Compile Include="CLASES_DE_GASTO_SIP_MAPPERS.cs" />
+    <Compile Include="COLA_PARAMETROS_REPORTES_MAPPERS.cs" />
+    <Compile Include="DCO_COLUMNAS_MAPPERS.cs" />
+    <Compile Include="DCO_DOCUMENTOS_COLUMNAS_MAPPERS.cs" />
+    <Compile Include="DCO_DOCUMENTOS_MAPPERS.cs" />
+    <Compile Include="DEDUCCIONES_MAPPERS.cs" />
+    <Compile Include="DLB_LIB_BOLSON_CAB_MAPPERS.cs" />
+    <Compile Include="DLB_LIB_BOLSON_DET_MAPPERS.cs" />
+    <Compile Include="DOCUMENTOS_DE_GASTOS_MAPPERS.cs" />
+    <Compile Include="DTP_DETALLES_DET_MAPPERS.cs" />
+    <Compile Include="DTP_DOCUMENTOS_DET_MAPPERS.cs" />
+    <Compile Include="DTP_TIPOS_PROGRA_CAB_MAPPERS.cs" />
+    <Compile Include="DTP_TIPOS_PROGRA_DET_MAPPERS.cs" />
+    <Compile Include="EGA_BENEFICIARIOS_MAPPERS.cs" />
+    <Compile Include="EGA_PARTIDAS_MAPPERS.cs" />
+    <Compile Include="FUENTES_FINANCIAMIENTO_MAPPERS.cs" />
+    <Compile Include="GERENCIAS_ADMINISTRATIVAS_MAPPERS.cs" />
+    <Compile Include="INSTITUCIONES_MAPPERS.cs" />
+    <Compile Include="LIBRETAS_MAPPERS.cs" />
+    <Compile Include="LIBROS_BANCO_MAPPERS.cs" />
+    <Compile Include="MONEDAS_MAPPERS.cs" />
+    <Compile Include="MUNICIPIOS_MAPPERS.cs" />
+    <Compile Include="OBJETOS_DEL_GASTO_MAPPERS.cs" />
+    <Compile Include="PAISES_MAPPERS.cs" />
+    <Compile Include="PRG_LIBRETAS_BOLSON_MAPPERS.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TPR_DETALLES_MAPPERS.cs" />
+    <Compile Include="TPR_DOCUMENTOS_MAPPERS.cs" />
+    <Compile Include="TPR_TIPOS_PROGRAMACION_MAPPERS.cs" />
+    <Compile Include="UNIDADES_EJECUTORAS_MAPPERS.cs" />
+    <Compile Include="VM_PAG_LISTA_VALORES_MAPPERS.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PAG_DA\PAG_DA.csproj">
+      <Project>{d4bacfe7-d825-4732-b3b0-317dd9c8890f}</Project>
+      <Name>PAG_DA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAG_DTO\PAG_DTO.csproj">
+      <Project>{252cb159-bc42-4ade-af9b-78fde798563b}</Project>
+      <Name>PAG_DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

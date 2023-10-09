@@ -1,0 +1,88 @@
+﻿@model IEnumerable<PAG_DTO.DTP_TIPOS_PROGRA_CAB_DTO>
+@{
+    ViewBag.Title = "Documentos Registro de Tipos Programación";
+    Layout = null;
+}
+
+<ng2-toasty [position]="'top-center'"></ng2-toasty>
+<div class="panel-heading" *ngIf="mostrar =='listado'">
+    <div class="pull-right">
+        @*1.- COLOCAR LOS BOTONES PRINCIPALES*@       
+        <div class="align-left">
+            <button class="btn btn-primary btn-success rounded"
+                    (click)="crearDocumento('A')"
+                    *ngIf="habilitarBoton('CREAR', '' )"
+                    title="Crear Documento"
+                    data-toggle="tooltip"><i class="fa fa-plus" aria-hidden="true"></i>Agregar</button>
+        </div>
+
+        @*{
+            if (ViewBag._SessionCrear == "1")
+            {
+                Html.ActionLink("Agregar", "DocTiposProgramCrear", "DocTiposProgram", new { idTipoOperacion = "A" }, new { class = "btn btn-primary btn-sm btn-success glyphicon glyphicon-plus", @id = "btnAgregar", @style = "color:white;" })
+            }
+        }
+        Html.ActionLink("Agregar", "DocTiposProgramCrear", "DocTiposProgram", null, new { class = "btn btn-primary btn-sm btn-success glyphicon glyphicon-plus", @id = "btnAgregar", @style = "color:white;" })*@
+    </div>
+    <h3 class="panel-title">@ViewBag.Title</h3>
+</div><!-- /.panel-heading -->
+<div class="panel-body">
+    @using (Html.BeginForm())
+    {
+               
+        <div  *ngIf="mostrar =='listado'">
+            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+            </div>
+            <p-dataTable [value]="dtp_tipos_program_cab" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true" 
+                         [globalFilter]="gb" tableStyleClass="table table-theme">
+                <p-column>
+                    <template let-col let-regCabecera="rowData" pTemplate="body">
+                            <a href="javascript:void(0)" (click)="consultarDocumento(regCabecera)" class="btn btn-xs btn-primary rounded" data-toggle="tooltip" data-placement="top" data-original-title="Consultar Documento" title="Consultar Documento"><i class="fa fa-eye"></i></a>
+                            <a href="javascript:void(0)" (click)="modificarDocumento(regCabecera)" *ngIf="habilitarBoton('MODIFICAR', regCabecera.API_ESTADO)" class="btn btn-xs btn-success rounded" data-toggle="tooltip" data-placement="top" data-original-title="Modificar Documento" title="Modificar Documento"><i class="fa fa-pencil"></i></a>
+                            <a href="javascript:void(0)" (click)="detalleDocumento(regCabecera, 'Eliminar')"  *ngIf="habilitarBoton('ELIMINAR', regCabecera.API_ESTADO)" class="btn btn-xs btn-danger rounded" data-toggle="tooltip" data-placement="top" data-original-title="Eliminar Documento" title="Eliminar Documento"><i class="fa fa-close"></i></a>
+                            <a href="javascript:void(0)" (click)="detalleDocumento(regCabecera, 'Verificar')" *ngIf="habilitarBoton('VERIFICAR', regCabecera.API_ESTADO)" class="btn btn-xs btn-warning rounded" data-toggle="tooltip" data-placement="top" data-original-title="Verificar Documento" title="Verificar Documento"><i class="fa fa-check"></i></a>
+                            <a href="javascript:void(0)" (click)="detalleDocumento(regCabecera, 'Desverificar')" *ngIf="habilitarBoton('DESVERIFICAR', regCabecera.API_ESTADO)" class="btn btn-xs btn-warning rounded" data-toggle="tooltip" data-placement="top" data-original-title="Verificar Documento" title="Desverificar Documento"><i class="fa fa-undo"></i></a>
+                            <a href="javascript:void(0)" (click)="detalleDocumento(regCabecera, 'Aprobar')" *ngIf="habilitarBoton('APROBAR', regCabecera.API_ESTADO)" class="btn btn-xs btn-primary rounded" data-toggle="tooltip" data-placement="top" data-original-title="Aprobar Documento" title="Aprobar Documento"><i class="fa fa-font"></i></a>
+                    </template>
+                </p-column>  
+                <p-column field="INSTITUCION" header="@Html.DisplayNameFor(model => model.INSTITUCION)" sortable="true"> </p-column>
+                <p-column field="DESC_INSTITUCION" header="" sortable="true"></p-column>
+                <p-column field="GA" header="@Html.DisplayNameFor(model => model.GA)" sortable="true"></p-column>
+                <p-column field="DESC_GA" header="" sortable="true"></p-column>
+                <p-column field="NRO_DOCUMENTO" header="@Html.DisplayNameFor(model => model.NRO_DOCUMENTO)" sortable="true"></p-column>
+                <p-column field="DPTO_LUGAR" header="@Html.DisplayNameFor(model => model.DPTO_LUGAR)" sortable="true"></p-column>
+                <p-column field="MUN_LUGAR" header="Mun" sortable="true"></p-column>
+                <p-column field="DESC_LUGAR" header="" sortable="true"></p-column>
+                <p-column field="DESC_TIPO_OPERACION" header="@Html.DisplayNameFor(model => model.DESC_TIPO_OPERACION)" sortable="true"></p-column>
+                <p-column field="USU_VERIFICACION" header="@Html.DisplayNameFor(model => model.USU_VERIFICACION)" sortable="true"></p-column>
+                <p-column header="@Html.DisplayNameFor(model => model.FEC_VERIFICACION)" sortable="true">
+                    <template let-col let-regCabecera="rowData" pTemplate="body">
+                        {{extraerFecha(regCabecera.FEC_VERIFICACION) | date:"dd/MM/yyyy :h:mm:ssa"}}
+                    </template>
+                </p-column> 
+                <p-column field="USU_APROBACION" header="@Html.DisplayNameFor(model => model.USU_APROBACION)" sortable="true"></p-column>
+                <p-column header="@Html.DisplayNameFor(model => model.FEC_APROBACION)" sortable="true">
+                    <template let-col let-regCabecera="rowData" pTemplate="body">
+                        {{extraerFecha(regCabecera.FEC_APROBACION) | date:"dd/MM/yyyy :h:mm:ssa"}}
+                    </template>
+                </p-column>
+                <p-column field="API_ESTADO" header="@Html.DisplayNameFor(model => model.API_ESTADO)" sortable="true"></p-column>
+            </p-dataTable>
+        </div>
+
+        <div *ngIf="mostrar=='Doc-Detalle'">
+             <doc-DocTiposProgramDetalle [tipo_operacion]="operacion" [Opc]="acc" [dtp_tipos_program_cab]="registro" (notificar)='onNotificar($event)'></doc-DocTiposProgramDetalle>
+        </div>
+        <div *ngIf="mostrar=='Doc-Consultar'">
+             <doc-DocTiposProgramConsulta [tipo_operacion]="operacion" [dtp_tipos_program_cab]="registro" (notificar)='onNotificar($event)'></doc-DocTiposProgramConsulta>
+        </div>
+        <div *ngIf="mostrar=='Doc-Crear' && registro != null">
+              <doc-DocTiposProgramCrear [tipo_operacion]="operacion" [dtp_tipos_program_cab]="registro" (notificar)='onNotificar($event)'></doc-DocTiposProgramCrear>
+        </div>
+       
+    }
+</div>
+
+

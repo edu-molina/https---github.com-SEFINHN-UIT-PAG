@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C0FEB7F1-11EC-4380-8604-A618D4D1A94F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAG_WCF</RootNamespace>
+    <AssemblyName>PAG_WCF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\packages\SEFIN.FWK.ERRORHANDLER.EXT.ORA.1.0.8\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SAS_DTO">
+      <HintPath>\\horus\librerias\SAS_WCF\SAS_DTO.dll</HintPath>
+    </Reference>
+    <Reference Include="SAS_INTERFACES">
+      <HintPath>\\horus\librerias\SAS_WCF\SAS_INTERFACES.dll</HintPath>
+    </Reference>
+    <Reference Include="SEFIN.FWK.ERRMSG.DTO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SEFIN.FWK.ERRMSG.DTO.1.0.1\lib\net45\SEFIN.FWK.ERRMSG.DTO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SEFIN.FWK.ERRORHANDLER, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SEFIN.FWK.IERRORHANDLER.1.0.4\lib\net45\SEFIN.FWK.ERRORHANDLER.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="extensions\SEFIN.FWK.ERRMSG.EXT.dll" />
+    <Content Include="extensions\SEFIN.FWK.ERRMSG.EXT.ORA.dll" />
+    <Content Include="PAG_Services.svc" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FILTER\BANCOS_FILTER.cs" />
+    <Compile Include="FILTER\BENEFICIARIOS_FILTER.cs" />
+    <Compile Include="FILTER\BEN_TIPOS_IDENTIFICACION_FILTER.cs" />
+    <Compile Include="FILTER\CG_REF_CODES_FILTER.cs" />
+    <Compile Include="FILTER\CLASES_DE_GASTO_CIP_FILTER.cs" />
+    <Compile Include="FILTER\CLASES_DE_GASTO_SIP_FILTER.cs" />
+    <Compile Include="FILTER\COLA_PARAMETROS_REPORTES_FILTER.cs" />
+    <Compile Include="FILTER\DCO_COLUMNAS_FILTER.cs" />
+    <Compile Include="FILTER\DCO_DOCUMENTOS_COLUMNAS_FILTER.cs" />
+    <Compile Include="FILTER\DCO_DOCUMENTOS_FILTER.cs" />
+    <Compile Include="FILTER\DEDUCCIONES_FILTER.cs" />
+    <Compile Include="FILTER\DLB_LIB_BOLSON_CAB_FILTER.cs" />
+    <Compile Include="FILTER\DLB_LIB_BOLSON_DET_FILTER.cs" />
+    <Compile Include="FILTER\DOCUMENTOS_DE_GASTOS_FILTER.cs" />
+    <Compile Include="FILTER\DTP_DETALLES_DET_FILTER.cs" />
+    <Compile Include="FILTER\DTP_DOCUMENTOS_DET_FILTER.cs" />
+    <Compile Include="FILTER\DTP_TIPOS_PROGRA_CAB_FILTER.cs" />
+    <Compile Include="FILTER\DTP_TIPOS_PROGRA_DET_FILTER.cs" />
+    <Compile Include="FILTER\EGA_BENEFICIARIOS_FILTER.cs" />
+    <Compile Include="FILTER\EGA_PARTIDAS_FILTER.cs" />
+    <Compile Include="FILTER\FUENTES_FINANCIAMIENTO_FILTER.cs" />
+    <Compile Include="FILTER\GERENCIAS_ADMINISTRATIVAS_FILTER.cs" />
+    <Compile Include="FILTER\INSTITUCIONES_FILTER.cs" />
+    <Compile Include="FILTER\LIBRETAS_FILTER.cs" />
+    <Compile Include="FILTER\LIBROS_BANCO_FILTER.cs" />
+    <Compile Include="FILTER\MONEDAS_FILTER.cs" />
+    <Compile Include="FILTER\MUNICIPIOS_FILTER.cs" />
+    <Compile Include="FILTER\OBJETOS_DEL_GASTO_FILTER.cs" />
+    <Compile Include="FILTER\PAISES_FILTER.cs" />
+    <Compile Include="FILTER\PRG_LIBRETAS_BOLSON_FILTER.cs" />
+    <Compile Include="FILTER\TPR_DETALLES_FILTER.cs" />
+    <Compile Include="FILTER\TPR_DOCUMENTOS_FILTER.cs" />
+    <Compile Include="FILTER\TPR_TIPOS_PROGRAMACION_FILTER.cs" />
+    <Compile Include="FILTER\UNIDADES_EJECUTORAS_FILTER.cs" />
+    <Compile Include="FILTER\VM_PAG_LISTA_VALORES_FILTER.cs" />
+    <Compile Include="Interceptor\dispatchers\Interceptor.cs" />
+    <Compile Include="Interceptor\InterceptorExtension.cs" />
+    <Compile Include="Interceptor\WcfInterceptorBehavior.cs" />
+    <Compile Include="PAG_Security.cs" />
+    <Compile Include="PAG_Services.svc.cs">
+      <DependentUpon>PAG_Services.svc</DependentUpon>
+    </Compile>
+    <Compile Include="PAG_ServicesUtil.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RDN\BANCOS_RDN.cs" />
+    <Compile Include="RDN\BENEFICIARIOS_RDN.cs" />
+    <Compile Include="RDN\BEN_TIPOS_IDENTIFICACION_RDN.cs" />
+    <Compile Include="RDN\CG_REF_CODES_RDN.cs" />
+    <Compile Include="RDN\CLASES_DE_GASTO_CIP_RDN.cs" />
+    <Compile Include="RDN\CLASES_DE_GASTO_SIP_RDN.cs" />
+    <Compile Include="RDN\COLA_PARAMETROS_REPORTES_RDN.cs" />
+    <Compile Include="RDN\DCO_COLUMNAS_RDN.cs" />
+    <Compile Include="RDN\DCO_DOCUMENTOS_COLUMNAS_RDN.cs" />
+    <Compile Include="RDN\DCO_DOCUMENTOS_RDN.cs" />
+    <Compile Include="RDN\DEDUCCIONES_RDN.cs" />
+    <Compile Include="RDN\DLB_LIB_BOLSON_CAB_RDN.cs" />
+    <Compile Include="RDN\DLB_LIB_BOLSON_DET_RDN.cs" />
+    <Compile Include="RDN\DOCUMENTOS_DE_GASTOS_RDN.cs" />
+    <Compile Include="RDN\DTP_DETALLES_DET_RDN.cs" />
+    <Compile Include="RDN\DTP_DOCUMENTOS_DET_RDN.cs" />
+    <Compile Include="RDN\DTP_TIPOS_PROGRA_CAB_RDN.cs" />
+    <Compile Include="RDN\DTP_TIPOS_PROGRA_DET_RDN.cs" />
+    <Compile Include="RDN\EGA_BENEFICIARIOS_RDN.cs" />
+    <Compile Include="RDN\EGA_PARTIDAS_RDN.cs" />
+    <Compile Include="RDN\FUENTES_FINANCIAMIENTO_RDN.cs" />
+    <Compile Include="RDN\GERENCIAS_ADMINISTRATIVAS_RDN.cs" />
+    <Compile Include="RDN\INSTITUCIONES_RDN.cs" />
+    <Compile Include="RDN\LIBRETAS_RDN.cs" />
+    <Compile Include="RDN\LIBROS_BANCO_RDN.cs" />
+    <Compile Include="RDN\MONEDAS_RDN.cs" />
+    <Compile Include="RDN\MUNICIPIOS_RDN.cs" />
+    <Compile Include="RDN\OBJETOS_DEL_GASTO_RDN.cs" />
+    <Compile Include="RDN\PAISES_RDN.cs" />
+    <Compile Include="RDN\PRG_LIBRETAS_BOLSON_RDN.cs" />
+    <Compile Include="RDN\RDN_API_LISTA_VALORES.cs" />
+    <Compile Include="RDN\RDN_API_SEGURIDAD.cs" />
+    <Compile Include="RDN\RDN_API_TRANSICIONES.cs" />
+    <Compile Include="RDN\TPR_DETALLES_RDN.cs" />
+    <Compile Include="RDN\TPR_DOCUMENTOS_RDN.cs" />
+    <Compile Include="RDN\TPR_TIPOS_PROGRAMACION_RDN.cs" />
+    <Compile Include="RDN\UNIDADES_EJECUTORAS_RDN.cs" />
+    <Compile Include="RDN\VM_PAG_LISTA_VALORES_RDN.cs" />
+    <Compile Include="SVC\BANCOS_SVC.cs" />
+    <Compile Include="SVC\BENEFICIARIOS_SVC.cs" />
+    <Compile Include="SVC\BEN_TIPOS_IDENTIFICACION_SVC.cs" />
+    <Compile Include="SVC\CG_REF_CODES_SVC.cs" />
+    <Compile Include="SVC\CLASES_DE_GASTO_CIP_SVC.cs" />
+    <Compile Include="SVC\CLASES_DE_GASTO_SIP_SVC.cs" />
+    <Compile Include="SVC\COLA_PARAMETROS_REPORTES_SVC.cs" />
+    <Compile Include="SVC\DCO_COLUMNAS_SVC.cs" />
+    <Compile Include="SVC\DCO_DOCUMENTOS_COLUMNAS_SVC.cs" />
+    <Compile Include="SVC\DCO_DOCUMENTOS_SVC.cs" />
+    <Compile Include="SVC\DEDUCCIONES_SVC.cs" />
+    <Compile Include="SVC\DLB_LIB_BOLSON_CAB_SVC.cs" />
+    <Compile Include="SVC\DLB_LIB_BOLSON_DET_SVC.cs" />
+    <Compile Include="SVC\DOCUMENTOS_DE_GASTOS_SCV.cs" />
+    <Compile Include="SVC\DTP_DETALLES_DET_SVC.cs" />
+    <Compile Include="SVC\DTP_DOCUMENTOS_DET_SVC.cs" />
+    <Compile Include="SVC\DTP_TIPOS_PROGRA_CAB_SVC.cs" />
+    <Compile Include="SVC\DTP_TIPOS_PROGRA_DET_SVC.cs" />
+    <Compile Include="SVC\EGA_BENEFICIARIOS_SCV.cs" />
+    <Compile Include="SVC\EGA_PARTIDAS_SVC.cs" />
+    <Compile Include="SVC\FUENTES_FINANCIAMIENTO_SVC.cs" />
+    <Compile Include="SVC\GERENCIAS_ADMINISTRATIVAS_SVC.cs" />
+    <Compile Include="SVC\INSTITUCIONES_SVC.cs" />
+    <Compile Include="SVC\LIBRETAS_SVC.cs" />
+    <Compile Include="SVC\LIBROS_BANCO_SVC.cs" />
+    <Compile Include="SVC\MONEDAS_SVC.cs" />
+    <Compile Include="SVC\MUNICIPIOS_SVC.cs" />
+    <Compile Include="SVC\OBJETOS_DEL_GASTO_SVC.cs" />
+    <Compile Include="SVC\PAISES_SVC.cs" />
+    <Compile Include="SVC\PRG_LIBRETAS_BOLSON_SVC.cs" />
+    <Compile Include="SVC\TPR_DETALLES_SVC.cs" />
+    <Compile Include="SVC\TPR_DOCUMENTOS_SVC.cs" />
+    <Compile Include="SVC\TPR_TIPOS_PROGRAMACION_SVC.cs" />
+    <Compile Include="SVC\UNIDADES_EJECUTORAS_SCV.cs" />
+    <Compile Include="SVC\VM_PAG_LISTA_VALORES_SVC.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PAG_DA\PAG_DA.csproj">
+      <Project>{d4bacfe7-d825-4732-b3b0-317dd9c8890f}</Project>
+      <Name>PAG_DA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAG_DTO\PAG_DTO.csproj">
+      <Project>{252cb159-bc42-4ade-af9b-78fde798563b}</Project>
+      <Name>PAG_DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAG_INTERFACES\PAG_INTERFACES.csproj">
+      <Project>{3e883b50-a393-4d7a-9d27-65e69b31ad0f}</Project>
+      <Name>PAG_INTERFACES</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAG_MAPPERS\PAG_MAPPERS.csproj">
+      <Project>{860aa89b-dc28-4a07-80aa-6827f3a50df3}</Project>
+      <Name>PAG_MAPPERS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sefin.Security.Wcf\Sefin.Security.Wcf.csproj">
+      <Project>{fc6f66c9-71af-4af8-9e4a-952b54bc28c7}</Project>
+      <Name>Sefin.Security.Wcf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sefin.Security\Sefin.Security.csproj">
+      <Project>{7bb61664-d30d-429a-968d-b72251eb18a7}</Project>
+      <Name>Sefin.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\PAG_WCF.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50181</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50181/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

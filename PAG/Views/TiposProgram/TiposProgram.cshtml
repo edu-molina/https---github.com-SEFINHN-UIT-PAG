@@ -1,0 +1,141 @@
+﻿@*Scripts para el estilo de las tablas dentro del tap*@
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/themes/omega/theme.css")" />
+<link rel="stylesheet" href="@Url.Content("~/node_modules/primeng/resources/primeng.min.css")" />
+@*----------------------------------------------------------*@
+
+
+
+<ng2-toasty [position]="'top-center'"></ng2-toasty>
+<div *ngIf="mostrar==''">
+    <div class="panel-heading">
+        <div class="pull-right">
+            @*1.- COLOCAR LOS BOTONES PRINCIPALES*@
+            <button class="btn btn-success rounded" (click)="ImprimirReporte()"><i class="fa fa-print" aria-hidden="true"></i>Reporte</button>
+        </div>
+        <h3 class="panel-title"> Consulta Consolidado Tipos Programación</h3>
+    </div><!-- /.panel-heading -->
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            <!--Aca se colocan los detalles-->
+            <div class="col-md-12">
+
+                <!-- Start color horizontal tabs -->
+                <div class="panel panel-tab panel-tab-double shadow">
+                    <!-- Start tabs heading -->
+                    <div class="panel-heading no-padding">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-border nav-border-top-danger active">
+                                <a href="#tab6-1" data-toggle="tab" class="text-center" aria-expanded="true">
+                                    Tipos Programación
+                                </a>
+                            </li>
+                            <li class="nav-border nav-border-top-primary">
+                                <a href="#tab6-2" data-toggle="tab" class="text-center" aria-expanded="false">
+                                    Tipos Documento
+                                </a>
+                            </li>
+                            <li class="nav-border nav-border-top-success">
+                                <a href="#tab6-3" data-toggle="tab" class="text-center" aria-expanded="false">
+                                    Valores
+                                </a>
+                            </li>
+                        </ul>
+                    </div><!-- /.panel-heading -->
+                    <!--/ End tabs heading -->
+                    <!-- Start tabs content -->
+                    <div class="panel-body">
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="tab6-1">
+                                <div class="table-responsive">
+                                    <div class="animated fadeIn">
+
+                                        <div>
+                                            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                            </div>
+                                            <p-dataTable [value]="tpr_tipos_program" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                         [globalFilter]="gb" tableStyleClass="" selectionMode="single"
+                                                         (onRowSelect)="clickFila($event)">
+                                                <p-column field="INSTITUCION" header="Institución" sortable="true"> </p-column>
+                                                <p-column field="GA" header="GA" sortable="true"></p-column>
+                                                <p-column field="TIPO_PROGRAMACION" header="Tipo Programación" sortable="true"></p-column>
+                                                <p-column field="DESC_TIPO_PROGRAMACION" header="Descripción" sortable="true"></p-column>
+                                                <p-column field="ESPECIAL" header="Especial" sortable="true">
+                                                    <template let-col let-acc="rowData" pTemplate="body">
+                                                        <div class="align-center ckbox ckbox-theme">
+                                                            <input [checked]="acc[col.field] === 'S'" type="checkbox" disabled="disabled">
+                                                            <label></label>
+                                                        </div>
+                                                    </template>
+                                                </p-column>
+                                            </p-dataTable>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="tab6-2">
+                                <div class="table-responsive">
+                                    <div class="animated fadeIn">
+
+                                        <div>
+                                            <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                            </div>
+                                            <p-dataTable [value]="tpr_documentos" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                         [globalFilter]="gb" selectionMode="single" tableStyleClass=""
+                                                         (onRowSelect)="clickFilaDoc($event)">
+                                                <p-column field="ID_DOCUMENTO" header="Id" sortable="true"></p-column>
+                                                <p-column field="DESC_DOCUMENTO" header="Documento" sortable="true"></p-column>
+                                                <p-column field="OBSERVACION" header="Observación" sortable="true"></p-column>
+                                            </p-dataTable>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="tab6-3">
+                                <div class="body-content animated fadeIn">
+
+                                    <div class="table-responsive">
+                                        <div class="animated fadeIn">
+
+                                            <div>
+                                                <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                                                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                                                    <input #gb type="text" pInputText size="50" placeholder="Filtrar">
+                                                </div>
+                                                <p-dataTable [value]="tpr_detalles" [rows]="10" [rowsPerPageOptions]="[5,10,20,50]" [pageLinks]="3" [paginator]="true"
+                                                             [globalFilter]="gb" selectionMode="single" tableStyleClass="">
+                                                    <p-column field="ID_DOCUMENTO" header="Id" sortable="true"></p-column>
+                                                    <p-column field="DESC_DOCUMENTO" header="Documento" sortable="true"></p-column>
+                                                    <p-column field="DESC_COLUMNA" header="Columna" sortable="true"></p-column>
+                                                    <p-column field="TIPO_COLUMNA" header="Tipo" sortable="true"></p-column>
+                                                    <p-column field="VALOR_NUMERO" header="Valor Numérico" sortable="true"></p-column>
+                                                    <p-column field="VALOR_CADENA" header="Valor Texto" sortable="true"></p-column>
+                                                </p-dataTable>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- /.panel-body -->
+                    <!--/ End tabs content -->
+                </div><!-- /.panel -->
+                <!--/ End color horizontal tabs -->
+
+            </div>
+        </div>
+
+    }
+
+</div>
+<div *ngIf="mostrar=='Doc-Reporte'">
+    <reports [Parametros]="reporte" (notificar)='Recargar($event)'></reports>
+</div>

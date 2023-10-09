@@ -1,0 +1,25 @@
+﻿<script src="@Url.Content("~/Scripts/build/pdf.js")"></script>
+<div class="panel-heading">
+    <div class="pull-right">
+        <button type="button" class="btn btn-success  btn-pushright " (click)="Volver()"> Regresar</button>
+    </div>
+    <h3 class="panel-title">Reporte</h3>
+</div><!-- /.panel-heading -->
+
+<div class="panel-body">
+
+    <h3 class="panel-title">@ViewBag.Report_tittle</h3>
+
+    <div>
+
+        <div class="panel-body">
+            <div id="target" style="text-align: center;">
+                <iframe #pdfViewer id="pdfViewer" name="pdfViewer" src='@Url.Content("~/Scripts/web/viewer.html")' style="width: 90%; height: 700px;" allowfullscreen="" webkitallowfullscreen=""></iframe>
+            </div>
+            <div id="placeholderPDF"></div>
+        </div>
+    </div>
+</div>
+    
+
+
